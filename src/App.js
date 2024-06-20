@@ -1,12 +1,12 @@
-import PostList from './components/post/PostList/PostList';
+// src/App.js
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from './redux/postsSlice';
-
+import PostList from './components/post/PostList/PostList';
+import PostComments from './components/post/PostItem/PostComments';
 
 const App = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
   const loading = useSelector((state) => state.posts.loading);
   const error = useSelector((state) => state.posts.error);
 
@@ -34,10 +34,10 @@ const App = () => {
       </div>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {posts.length > 0 && <PostList />}
+      <PostList />
+      <PostComments />
     </div>
   );
 };
 
 export default App;
-

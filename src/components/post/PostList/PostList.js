@@ -1,12 +1,20 @@
 // src/components/PostList.js
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectPost, fetchComments } from '../../../redux/postItemSlice';
 import { MdInsertComment } from "react-icons/md";
 import { GiFrozenArrow } from "react-icons/gi";
 import { GiFlamingArrow } from "react-icons/gi";
 
 const PostList = () => {
   const posts = useSelector((state) => state.posts.posts);
+
+  const dispatch = useDispatch();
+
+  const handlePostClick = (post) => {
+    dispatch(selectPost(post)); // Select the post
+    dispatch(fetchComments(post.permalink)); // Fetch comments for the selected post
+  };
 
   return (
     <div>
@@ -35,8 +43,10 @@ const PostList = () => {
 
               <div className='comments_container'>
                 <span className='num_comments'>{post.data.num_comments}</span>
-                <button><MdInsertComment /></button>
+                <button onClick={() => handlePostClick(post.data)} ><MdInsertComment /></button>
               </div>
+
+
             </li>
           ))}
         </ul>
