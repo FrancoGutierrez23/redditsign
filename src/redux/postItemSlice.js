@@ -1,18 +1,14 @@
-
+// redux/postItemSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Asynchronous thunk action to fetch comments of a selected post
 export const fetchComments = createAsyncThunk(
   'postItem/fetchComments',
   async (permalink, thunkAPI) => {
     try {
-      // Removing the last character from permalink
       const trimmedPermalink = permalink.slice(0, -1);
       const response = await fetch(`https://www.reddit.com${trimmedPermalink}.json`);
       const data = await response.json();
-      // The comments are usually in the second element of the array
       const comments = data[1].data.children.map(child => child.data);
-      console.log(comments);
       return comments;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -20,7 +16,6 @@ export const fetchComments = createAsyncThunk(
   }
 );
 
-// Create a slice for the selected post and its comments
 const postItemSlice = createSlice({
   name: 'postItem',
   initialState: {
@@ -28,12 +23,19 @@ const postItemSlice = createSlice({
     comments: [],
     loading: false,
     error: null,
+    isModalOpen: false, // Add a state for modal visibility
   },
   reducers: {
     selectPost: (state, action) => {
       state.post = action.payload;
-      state.comments = []; // Reset comments when a new post is selected
+      state.comments = [];
+      state.isModalOpen = true; // Open the modal when a post is selected
     },
+    closeCommentsModal: (state) => {
+      state.isModalOpen = false; // Close the modal
+      state.post = null;
+      state.comments = [];
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -52,5 +54,5 @@ const postItemSlice = createSlice({
   }
 });
 
-export const { selectPost } = postItemSlice.actions;
+export const { selectPost, closeCommentsModal } = postItemSlice.actions;
 export default postItemSlice.reducer;
