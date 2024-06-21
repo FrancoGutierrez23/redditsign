@@ -1,3 +1,4 @@
+import './SubredditList.css'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../../../redux/postsSlice';
@@ -13,7 +14,7 @@ const SubredditList = () => {
   }, [dispatch, subreddit]);
 
   return (
-    <aside className="subreddit-list">
+    <aside className="subreddit_list">
         {['pics', 'funny', 'nature', 'technology', 'gaming'].map((sub) => (
           <button key={sub} className='subreddit-option' onClick={() => {
             setSubreddit(sub);

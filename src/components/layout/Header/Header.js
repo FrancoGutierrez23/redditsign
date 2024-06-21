@@ -1,4 +1,4 @@
-// src/components/layout/Header/Header.js
+import './Header.css'
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchSearchResults } from '../../../redux/postsSlice';
@@ -16,15 +16,16 @@ const Header = () => {
 
   return (
     <header>
-      <h1>Reddit Viewer</h1>
-      <form onSubmit={handleSearchSubmit}>
+      <h1>Redditsign</h1>
+      <form onSubmit={handleSearchSubmit} name='search' className='search_form'>
         <input 
           type="text" 
+          className='search_box'
           placeholder="Search posts..." 
           value={searchQuery} 
           onChange={(e) => setSearchQuery(e.target.value)} 
         />
-        <button type="submit">Search</button>
+        <button type="submit" className='search_button'>Search</button>
       </form>
     </header>
   );
