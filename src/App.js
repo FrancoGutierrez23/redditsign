@@ -4,16 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from './redux/postsSlice';
 import PostList from './components/post/PostList/PostList';
 import PostComments from './components/post/PostItem/PostComments';
+import Header from './components/layout/Header/Header';
 
 const App = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.posts.loading);
   const error = useSelector((state) => state.posts.error);
-
-  // List of predefined subreddits
-  const subreddits = ['pics', 'funny', 'nature', 'technology', 'gaming'];
-
-  // State for managing the current subreddit
   const [subreddit, setSubreddit] = useState('pics'); // Default subreddit is 'pics'
 
   // Fetch posts whenever the selected subreddit changes
@@ -23,9 +19,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Reddit Viewer</h1>
+      <Header />
       <div className="subreddit-list">
-        {subreddits.map((sub) => (
+        {['pics', 'funny', 'nature', 'technology', 'gaming'].map((sub) => (
           <button key={sub} onClick={() => {
             setSubreddit(sub);
             dispatch(fetchPosts(sub));
