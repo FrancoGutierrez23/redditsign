@@ -1,7 +1,7 @@
 // src/components/SubredditSelector.js
-import React from 'react';
+/*import React from 'react';
 
-const subreddits = ['pics', 'funny', 'news', 'technology', 'gaming'];
+const subreddits = ['pics', 'funny', 'news', 'technology', 'gaming', 'messi'];
 
 const SubredditSelector = ({ selectedSubreddit, setSubreddit }) => {
   return (
@@ -18,4 +18,4 @@ const SubredditSelector = ({ selectedSubreddit, setSubreddit }) => {
   );
 };
 
-export default SubredditSelector;
+export default SubredditSelector;*/

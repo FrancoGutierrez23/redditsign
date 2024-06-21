@@ -1,4 +1,3 @@
-// src/components/PostList.js
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPost, fetchComments } from '../../../redux/postItemSlice';
@@ -17,14 +16,13 @@ const PostList = () => {
   };
 
   return (
-    <div>
-      <h2>Posts</h2>
+    <main className='post-list'>
       {posts.length === 0 ? (
-        <p>No posts available.</p>
+        <p className='no_posts_fallback_text'>No posts available.</p>
       ) : (
-        <ul>
+        <ul className='posts_container'>
           {posts.map((post) => (
-            <li key={post.data.id}>
+            <li key={post.data.id} id={post.data.name} className='post'>
               <h3 className='post_title'>{post.data.title}</h3>
 
               {post.data.url.includes('jpeg') || post.data.url.includes('png') ? (
@@ -36,14 +34,14 @@ const PostList = () => {
               <span className='post_author' >Author: {post.data.author}</span>
 
               <div className='vote_container'>
-                <button><GiFlamingArrow /></button>
+                <button className='upvote_button'><GiFlamingArrow className='upvote_icon' /></button>
                   <span className='ups_number' >{post.data.ups}</span>
-                <button><GiFrozenArrow /></button>
+                <button className='downvote_button'><GiFrozenArrow className='downvote_icon' /></button>
               </div>
 
               <div className='comments_container'>
                 <span className='num_comments'>{post.data.num_comments}</span>
-                <button onClick={() => handlePostClick(post.data)} ><MdInsertComment /></button>
+                <button onClick={() => handlePostClick(post.data)} className='comment_button' ><MdInsertComment className='comment_button_icon' /></button>
               </div>
 
 
@@ -51,7 +49,7 @@ const PostList = () => {
           ))}
         </ul>
       )}
-    </div>
+    </main>
   );
 };
 

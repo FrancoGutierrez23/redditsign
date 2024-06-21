@@ -1,4 +1,4 @@
-// src/redux/postItemSlice.js
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Asynchronous thunk action to fetch comments of a selected post
@@ -12,6 +12,7 @@ export const fetchComments = createAsyncThunk(
       const data = await response.json();
       // The comments are usually in the second element of the array
       const comments = data[1].data.children.map(child => child.data);
+      console.log(comments);
       return comments;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
