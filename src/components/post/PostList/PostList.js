@@ -24,6 +24,15 @@ const PostList = () => {
         <ul className='posts_container'>
           {posts.map((post) => (
             <li key={post.data.id} id={post.data.name} className='post'>
+
+              <div className='post_info'>
+                <span className='post_author'>{post.data.author} in </span>
+
+                <span>{post.data.subreddit_name_prefixed}</span>
+
+                <span className='post_time'> {timeAgo(post.data.created)}</span>
+              </div>
+
               <h3 className='post_title'>{post.data.title}</h3>
 
               {post.data.url.includes('jpeg') || post.data.url.includes('png') ? (
@@ -31,11 +40,6 @@ const PostList = () => {
               ) : (
                 post.data.thumbnail_width === null ? <img src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png' alt={post.data.title} className='post_img' /> : <img src={post.data.thumbnail} alt={post.data.title} className='post_img' />
               )}
-
-              <span className='post_author'>Author: {post.data.author}</span>
-
-              {/* Display time ago */}
-              <span className='post_time'>{timeAgo(post.data.created)}</span>
 
               <div className='vote_container'>
                 <button className='upvote_button'><GiFlamingArrow className='upvote_icon' /></button>
