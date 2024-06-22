@@ -1,6 +1,9 @@
 .posts_container {
     display: flex;
+    width: 100%;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 3rem;
     padding-top: 6rem;
+    padding-left: 1rem;
+    list-style: none;
 }

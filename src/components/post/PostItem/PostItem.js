@@ -7,21 +7,21 @@ import { timeAgo } from '../../utils';
 
 const PostItem = ({ post, onClick }) => {
   return (
-    <div className='post'>
+    <div className='post_container'>
       <div className='post_info'>
-        <span className='post_author'>{post.author} in </span>
-        <span>{post.subreddit_name_prefixed}</span>
+        <span className='post_author'>{post.author} in <a href='www'>{post.subreddit_name_prefixed}</a></span>
         <span className='post_time'> {timeAgo(post.created)}</span>
       </div>
 
       <h3 className='post_title'>{post.title}</h3>
 
       {post.url.includes('jpeg') || post.url.includes('png') ? (
-        <img src={post.url} alt={post.title} style={{ width: '100px' }} className='post_img' />
+        <img src={post.url} alt={post.title} className='post_img' />
       ) : (
         post.thumbnail_width === null ? <img src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png' alt={post.title} className='post_img' /> : <img src={post.thumbnail} alt={post.title} className='post_img' />
       )}
 
+      <div className='interactions'>
       <div className='vote_container'>
         <button className='upvote_button'><GiFlamingArrow className='upvote_icon' /></button>
         <span className='ups_number'>{post.ups}</span>
@@ -36,6 +36,8 @@ const PostItem = ({ post, onClick }) => {
           </button>
         )}
       </div>
+      </div>
+
     </div>
   );
 };

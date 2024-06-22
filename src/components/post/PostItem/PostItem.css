@@ -1,0 +1,92 @@
+/* Post element */
+.post {
+    width: 100%;
+}
+
+.post_container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+/* Author, subreddit and time */
+.post_info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+}
+
+.post_author {
+    font-weight: bold;
+}
+
+.post_time {
+    color: #ffffff88;
+    font-size: 0.8rem;
+}
+
+
+/* Post's title */
+.post_title {
+    font-size: 1.25rem;
+}
+
+
+/* Post's Image */
+.post_img {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+/* Post buttons (upvotes and comments) */
+.interactions {
+    display: flex;
+    gap: 2rem;
+}
+
+
+/* Votes button */
+.vote_container {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.upvote_button,
+.downvote_button,
+.comment_button {
+    width: 2rem;
+    height: 2rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upvote_button:hover,
+.downvote_button:hover,
+.comment_button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.upvote_icon,
+.downvote_icon,
+.comment_button_icon {
+    font-size: 1.5rem;
+}
+
+.upvote_icon {
+    rotate: -90deg;
+}
+
+
+/* Comment button */
+.comments_container {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+}
+
