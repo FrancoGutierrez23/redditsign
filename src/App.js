@@ -13,9 +13,9 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <SubredditList />
       <PostList />
-      {isModalOpen && <PostComments />} {/* Conditionally render modal */}
+      {isModalOpen && <PostComments />}
+      <SubredditList />
     </div>
   );
 };

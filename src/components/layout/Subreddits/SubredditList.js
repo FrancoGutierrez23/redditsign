@@ -15,8 +15,9 @@ const SubredditList = () => {
 
   return (
     <aside className="subreddit_list">
+      <h3 className='subreddits_title'>Subrredits</h3>
         {['pics', 'funny', 'nature', 'technology', 'gaming'].map((sub) => (
-          <button key={sub} className='subreddit-option' onClick={() => {
+          <button key={sub} className='subreddit_option' onClick={() => {
             setSubreddit(sub);
             dispatch(fetchPosts(sub));
           }}>{sub}</button>
