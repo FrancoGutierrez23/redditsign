@@ -28,7 +28,7 @@ const PostComments = () => {
         <h4>Comments</h4>
         {loading && <p>Loading comments...</p>}
         {error && <p>Error loading comments: {error}</p>}
-        {!loading && comments.length === 0 && <p>No comments available.</p>}
+        {!loading && comments.length === 0 && <span className='posts_fallback'>No comments available.</span>}
         <ul className='comments-list'>
           {comments.map((comment) => (
             <li key={comment.id}>

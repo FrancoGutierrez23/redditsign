@@ -15,10 +15,10 @@ const PostItem = ({ post, onClick }) => {
 
       <h3 className='post_title'>{post.title}</h3>
 
-      {post.url.includes('jpeg') || post.url.includes('png') ? (
-        <img src={post.url} alt={post.title} className='post_img' />
+      {post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') ? (
+        <img src={post.url} alt={post.title} className='post_img' style={{width: post.thumbnail_width || '100px', height: post.thumbnail_height || '100px'}} />
       ) : (
-        post.thumbnail_width === null ? <img src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png' alt={post.title} className='post_img' /> : <img src={post.thumbnail} alt={post.title} className='post_img' />
+        post.thumbnail_width === null ? <img src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png' alt={post.title} className='post_img' style={{width: post.thumbnail_width  || '100px', height: post.thumbnail_height || '100px'}} /> : <img src={post.thumbnail} alt={post.title} className='post_img' style={{width: post.thumbnail_width || '100px', height: post.thumbnail_height || '100px'}} />
       )}
 
       <div className='interactions'>

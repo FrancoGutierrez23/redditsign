@@ -17,7 +17,7 @@ const PostList = () => {
   return (
     <main className='post-list'>
       {posts.length === 0 ? (
-        <p className='no_posts_fallback_text'>No posts available.</p>
+        <p className='no_posts_fallback_text'>Loading posts...</p>
       ) : (
         <ul className='posts_container'>
           {posts.map((post) => (

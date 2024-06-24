@@ -7,3 +7,8 @@
     padding-left: 1rem;
     list-style: none;
 }
+
+.no_posts_fallback_text {
+    padding-top: 6rem;
+    min-width: 100%;
+  }
