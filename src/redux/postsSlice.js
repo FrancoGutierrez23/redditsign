@@ -1,4 +1,3 @@
-// redux/postsSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Asynchronous thunk action to fetch posts from a subreddit
@@ -6,8 +5,8 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (subreddit,
   try {
     const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
     const data = await response.json();
-    console.log(data.data.children);
-    return data.data.children;
+   // console.log(data.data.children);
+    return data.data.children.slice(0, 5);
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message); // Handle error
   }
