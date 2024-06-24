@@ -1,31 +1,42 @@
-import './SubredditList.css'
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../../../redux/postsSlice';
+// src/components/layout/Subreddits/SubredditList.js
+
+import './SubredditList.css';
+import React, { useState, Suspense } from 'react';
+import { useSuspenseFetch } from '../../../hooks/useSuspenseFetch';
+import { fetchPostsData } from '../../../api';
+import PostList from '../../post/PostList/PostList';
 
 const SubredditList = () => {
-    const dispatch = useDispatch();
-  const loading = useSelector((state) => state.posts.loading);
-  const error = useSelector((state) => state.posts.error);
-  const [subreddit, setSubreddit] = useState('pics'); 
+  const [selectedSubreddit, setSelectedSubreddit] = useState('pics');
 
-  useEffect(() => {
-    dispatch(fetchPosts(subreddit));
-  }, [dispatch, subreddit]);
+  // This fetches the posts for the selected subreddit using the Suspense-friendly fetch function
+  const posts = useSuspenseFetch(selectedSubreddit, () => fetchPostsData(selectedSubreddit));
+
+  // Log the posts data to verify
+  console.log('Fetched posts:', posts);
 
   return (
-    <aside className="subreddit_list">
-      <h3 className='subreddits_title'>Subrredits</h3>
+    <div className="container">
+      <aside className="subreddit_list">
+        <h3 className="subreddits_title">Subreddits</h3>
         {['pics', 'funny', 'nature', 'technology', 'gaming', 'paranormal'].map((sub) => (
-          <button key={sub} className='subreddit_option' onClick={() => {
-            setSubreddit(sub);
-            dispatch(fetchPosts(sub));
-          }}>{sub}</button>
+          <button
+            key={sub}
+            className={`subreddit_option ${selectedSubreddit === sub ? 'active' : ''}`}
+            onClick={() => setSelectedSubreddit(sub)}
+          >
+            {sub}
+          </button>
         ))}
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-    </aside>
-  )
-}
+      </aside>
+      <main className="posts_container">
+        <Suspense fallback={<p>Loading posts...</p>}>
+          {/* Render the PostList component with the fetched posts */}
+          <PostList posts={posts} />
+        </Suspense>
+      </main>
+    </div>
+  );
+};
 
 export default SubredditList;

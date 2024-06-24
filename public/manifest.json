@@ -1,0 +1,20 @@
+{
+    "name": "Redditsign",
+    "short_name": "Redditsign",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "theme_color": "#161c23",
+    "background_color": "#161c23",
+    "icons": [
+      {
+        "src": "icon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "icon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }

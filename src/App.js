@@ -1,9 +1,11 @@
+// src/App.js
+
 import React, { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import './App.css';
-import PostList from './components/post/PostList/PostList';
 import Header from './components/layout/Header/Header';
-// Lazy load components
+
+const PostList = lazy(() => import('./components/post/PostList/PostList'));
 const PostComments = lazy(() => import('./components/post/PostComments/PostComments'));
 const SubredditList = lazy(() => import('./components/layout/Subreddits/SubredditList'));
 
@@ -13,13 +15,9 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <PostList />
-      {isModalOpen && (
-        <Suspense fallback={<div>Loading comments...</div>}>
-          <PostComments />
-        </Suspense>
-      )}
-      <Suspense fallback={<div>Loading subreddits...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <PostList />
+        {isModalOpen && <PostComments />}
         <SubredditList />
       </Suspense>
     </div>
