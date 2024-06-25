@@ -21,9 +21,10 @@ const App = () => {
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <SubredditList />
-        {loading && <p>Loading...</p>}
+        {loading && <p className='problem'>Loading...</p>}
         {error && <p>Error: {error}</p>}
         <PostList posts={posts} after={after} selectedSubreddit={selectedSubreddit} />
+        
         {isModalOpen && <PostComments />}
       </Suspense>
     </div>
@@ -31,3 +32,4 @@ const App = () => {
 };
 
 export default React.memo(App);
+

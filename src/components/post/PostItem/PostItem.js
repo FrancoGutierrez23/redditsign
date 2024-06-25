@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import './PostItem.css';
-import { MdInsertComment } from "react-icons/md";
-import { GiFrozenArrow, GiFlamingArrow } from "react-icons/gi";
 import { useDispatch } from 'react-redux';
 import { selectPost, fetchComments } from '../../../redux/postItemSlice';
 import { timeAgo } from '../../utils';
@@ -37,16 +35,19 @@ const PostItem = ({ post }) => {
 
   // Helper to render post image
   const renderPostImage = () => {
+    const width = post.thumbnail_width || 320; // Default width if not provided
+    const height = post.thumbnail_height || 320; // Default height if not provided
+
     if (isImagePost()) {
       return (
         <img
           src={post.url}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-          loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
+          loading={shouldPreload ? 'eager' : 'lazy'}
           onLoad={handleImageLoaded}
-          width="320" // Set explicit width
-          height="320" // Set explicit height
+          width={width}
+          height={height}
         />
       );
     } else if (!post.thumbnail_width) {
@@ -55,10 +56,10 @@ const PostItem = ({ post }) => {
           src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png'
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-          loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
+          loading={shouldPreload ? 'eager' : 'lazy'}
           onLoad={handleImageLoaded}
-          width="320" // Set explicit width
-          height="320" // Set explicit height
+          width={width}
+          height={height}
         />
       );
     } else {
@@ -67,17 +68,17 @@ const PostItem = ({ post }) => {
           src={post.thumbnail}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-          loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
+          loading={shouldPreload ? 'eager' : 'lazy'}
           onLoad={handleImageLoaded}
-          width="320" // Set explicit width
-          height="320" // Set explicit height
+          width={width}
+          height={height}
         />
       );
     }
   };
 
   return (
-    <div className='post_container'>
+    <>
       <div className='post_info'>
         <span className='post_author'>{post.author} in <a href={post.subreddit_name_prefixed}>{post.subreddit_name_prefixed}</a></span>
         <span className='post_time'>{timeAgo(post.created)}</span>
@@ -89,17 +90,17 @@ const PostItem = ({ post }) => {
 
       <div className='interactions'>
         <div className='vote_container'>
-          <button className='upvote_button'><GiFlamingArrow className='upvote_icon' /></button>
+          <button className='upvote_button'>up</button>
           <span className='ups_number'>{post.ups}</span>
-          <button className='downvote_button'><GiFrozenArrow className='downvote_icon' /></button>
+          <button className='downvote_button'>down</button>
         </div>
 
         <div className='comments_container'>
           <span className='num_comments'>{post.num_comments}</span>
-          <button onClick={handleCommentsClick}><MdInsertComment /></button>
+          <button onClick={handleCommentsClick}>comments</button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

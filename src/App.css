@@ -19,6 +19,9 @@
   .App {
     display: flex;
     gap: 2rem;
-    justify-content: center;
-    
+    justify-content: space-between;
+  }
+
+  .problem {
+    display: none;
   }

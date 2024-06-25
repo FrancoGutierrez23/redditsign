@@ -22,7 +22,7 @@ const PostList = ({ posts }) => {
   const [isFetching] = useInfiniteScroll(fetchMorePosts);
 
   return (
-    <main className='post-list'>
+    <main className='posts-list'>
       {posts.length === 0 ? (
         <p className='no_posts_fallback_text'>No posts available.</p>
       ) : (

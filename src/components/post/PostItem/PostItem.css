@@ -37,8 +37,6 @@
 /* Post's Image */
 .post_img {
     display: block;
-    width: 20rem; /* Set explicit width */
-    height: 20rem; /* Set explicit height */
     opacity: 0; /* Initially hide image */
     transition: opacity 0.3s ease; /* Smooth fade-in transition */
   }
