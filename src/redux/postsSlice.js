@@ -2,12 +2,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Asynchronous thunk action to fetch posts from a subreddit
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (subreddit, thunkAPI) => {
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async ({ subreddit, after = '' }, thunkAPI) => {
   try {
-    const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
+    const response = await fetch(`https://www.reddit.com/r/${subreddit}.json?after=${after}`);
     const data = await response.json();
-   // console.log(data.data.children);
-    return data.data.children;
+    return { posts: data.data.children, after: data.data.after };
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message); // Handle error
   }
@@ -18,7 +17,6 @@ export const fetchSearchResults = createAsyncThunk('posts/fetchSearchResults', a
   try {
     const response = await fetch(`https://www.reddit.com/search.json?q=${query}`);
     const data = await response.json();
-    console.log(data.data.children)
     return data.data.children;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message); // Handle error
@@ -32,9 +30,16 @@ const postsSlice = createSlice({
     posts: [],
     loading: false,
     error: null,
+    after: '', // To keep track of the pagination token
+    selectedSubreddit: 'pics' // Default subreddit
   },
   reducers: {
-    // You can add normal reducers here if needed
+    resetPosts: (state) => {
+      state.posts = [];
+      state.after = '';
+      state.selectedSubreddit = '';
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,7 +49,8 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = action.payload;
+        state.posts = [...state.posts, ...action.payload.posts];
+        state.after = action.payload.after;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;
@@ -57,6 +63,7 @@ const postsSlice = createSlice({
       .addCase(fetchSearchResults.fulfilled, (state, action) => {
         state.loading = false;
         state.posts = action.payload;
+        state.after = ''; // Reset 'after' for search results
       })
       .addCase(fetchSearchResults.rejected, (state, action) => {
         state.loading = false;
@@ -65,4 +72,6 @@ const postsSlice = createSlice({
   }
 });
 
+export const { resetPosts } = postsSlice.actions;
 export default postsSlice.reducer;
+

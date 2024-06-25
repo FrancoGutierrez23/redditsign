@@ -1,5 +1,4 @@
 // src/App.js
-
 import React, { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import './App.css';
@@ -14,14 +13,17 @@ const App = () => {
   const posts = useSelector((state) => state.posts.posts);
   const loading = useSelector((state) => state.posts.loading);
   const error = useSelector((state) => state.posts.error);
+  const after = useSelector((state) => state.posts.after);
+  const selectedSubreddit = useSelector((state) => state.posts.selectedSubreddit);
+
   return (
     <div className="App">
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
-      <SubredditList />
+        <SubredditList />
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
-        <PostList posts={posts} />
+        <PostList posts={posts} after={after} selectedSubreddit={selectedSubreddit} />
         {isModalOpen && <PostComments />}
       </Suspense>
     </div>

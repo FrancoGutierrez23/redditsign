@@ -36,9 +36,16 @@
 
 /* Post's Image */
 .post_img {
+    display: block;
     width: 20rem;
-    height: auto;
-}
+    height: 20rem;
+    opacity: 0; /* Initially hide image */
+    transition: opacity 0.3s ease; /* Smooth fade-in transition */
+  }
+  
+  .post_img.loaded {
+    opacity: 1; /* Show image when loaded */
+  }
 
 /* Post buttons (upvotes and comments) */
 .interactions {

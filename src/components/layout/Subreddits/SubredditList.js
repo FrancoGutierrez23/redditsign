@@ -1,46 +1,31 @@
 // src/components/layout/Subreddits/SubredditList.js
-
-import './SubredditList.css';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { fetchPosts } from '../../../redux/postsSlice';
+import { useDispatch} from 'react-redux';
+import { fetchPosts, resetPosts } from '../../../redux/postsSlice';
+import './SubredditList.css';
 
 const SubredditList = () => {
   const dispatch = useDispatch();
-  
-  const posts = useSelector((state) => state.posts.posts);
-
-
   const [selectedSubreddit, setSelectedSubreddit] = useState('pics');
-  const [isSearchActive, setIsSearchActive] = useState(false);
-
-  // Fetch posts for the selected subreddit or search results
+  
   useEffect(() => {
-    if (!isSearchActive) {
-      dispatch(fetchPosts(selectedSubreddit));
-    }
-  }, [dispatch, selectedSubreddit, isSearchActive]);
-
-  // Log the posts to verify the state after search
-  console.log('Current posts:', posts);
+    dispatch(resetPosts()); // Reset posts when subreddit changes
+    dispatch(fetchPosts({ subreddit: selectedSubreddit, after: null }));
+  }, [dispatch, selectedSubreddit]);
 
   return (
-      <aside className="subreddit_list">
-        <h3 className="subreddits_title">Subreddits</h3>
-        {['pics', 'funny', 'nature', 'technology', 'gaming', 'paranormal'].map((sub) => (
-          <button
-            key={sub}
-            className={`subreddit_option ${selectedSubreddit === sub ? 'active' : ''}`}
-            onClick={() => {
-              setSelectedSubreddit(sub);
-              setIsSearchActive(false); // Deactivate search view
-            }}
-          >
-            {sub}
-          </button>
-        ))}
-      </aside>
+    <aside className="subreddit_list">
+      <h3 className="subreddits_title">Subreddits</h3>
+      {['pics', 'funny', 'nature', 'technology', 'gaming', 'paranormal'].map((sub) => (
+        <button
+          key={sub}
+          className={`subreddit_option ${selectedSubreddit === sub ? 'active' : ''}`}
+          onClick={() => setSelectedSubreddit(sub)}
+        >
+          {sub}
+        </button>
+      ))}
+    </aside>
   );
 };
 

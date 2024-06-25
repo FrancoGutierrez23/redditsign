@@ -1,12 +1,26 @@
 // src/components/post/PostList/PostList.js
-
-import './PostList.css';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts } from '../../../redux/postsSlice';
+import useInfiniteScroll from '../../../hooks/useInfiniteScroll';
 import PostItem from '../PostItem/PostItem';
+import './PostList.css';
 
-const PostList = ({ posts = [] }) => {
-  // Ensure posts is never undefined; use a default empty array if it is.
+const PostList = ({ posts }) => {
+  const dispatch = useDispatch();
+  const after = useSelector((state) => state.posts.after);
+  const selectedSubreddit = useSelector((state) => state.posts.selectedSubreddit);
+  
+  // Callback to fetch the next page of posts
+  const fetchMorePosts = useCallback(async () => {
+    if (after) {
+      dispatch(fetchPosts({ subreddit: selectedSubreddit, after }));
+    }
+  }, [dispatch, selectedSubreddit, after]);
+
+  // Use the custom hook for infinite scroll
+  const [isFetching] = useInfiniteScroll(fetchMorePosts);
+
   return (
     <main className='post-list'>
       {posts.length === 0 ? (
@@ -20,13 +34,9 @@ const PostList = ({ posts = [] }) => {
           ))}
         </ul>
       )}
+      {isFetching && <p>Loading more posts...</p>}
     </main>
   );
-};
-
-// Define the expected prop types for PostList
-PostList.propTypes = {
-  posts: PropTypes.array // Expecting an array for posts
 };
 
 export default React.memo(PostList);

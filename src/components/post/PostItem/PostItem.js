@@ -1,4 +1,6 @@
-import React from 'react';
+// src/components/post/PostItem/PostItem.js
+
+import React, { useState, useEffect } from 'react';
 import './PostItem.css';
 import { MdInsertComment } from "react-icons/md";
 import { GiFrozenArrow, GiFlamingArrow } from "react-icons/gi";
@@ -8,6 +10,19 @@ import { timeAgo } from '../../utils';
 
 const PostItem = ({ post }) => {
   const dispatch = useDispatch();
+  const [imageLoaded, setImageLoaded] = useState(false); // State to track image loading
+  const [shouldPreload, setShouldPreload] = useState(true); // State to control preload
+
+  const handleImageLoaded = () => {
+    setImageLoaded(true);
+  };
+
+  useEffect(() => {
+    // Disable preload after the first image is loaded
+    if (imageLoaded) {
+      setShouldPreload(false);
+    }
+  }, [imageLoaded]);
 
   const handleCommentsClick = () => {
     dispatch(selectPost(post));
@@ -23,12 +38,36 @@ const PostItem = ({ post }) => {
   // Helper to render post image
   const renderPostImage = () => {
     if (isImagePost()) {
-      return <img src={post.url} alt={post.title} className='post_img' loading="lazy" />;
+      return (
+        <img
+          src={post.url}
+          alt={post.title}
+          className={`post_img ${imageLoaded ? 'loaded' : ''}`}
+          loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
+          onLoad={handleImageLoaded}
+        />
+      );
+    } else if (!post.thumbnail_width) {
+      return (
+        <img
+          src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png'
+          alt={post.title}
+          className={`post_img ${imageLoaded ? 'loaded' : ''}`}
+          loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
+          onLoad={handleImageLoaded}
+        />
+      );
+    } else {
+      return (
+        <img
+          src={post.thumbnail}
+          alt={post.title}
+          className={`post_img ${imageLoaded ? 'loaded' : ''}`}
+          loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
+          onLoad={handleImageLoaded}
+        />
+      );
     }
-    if (!post.thumbnail_width) {
-      return <img src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png' alt={post.title} className='post_img' loading="lazy" />;
-    }
-    return <img src={post.thumbnail} alt={post.title} className='post_img' loading="lazy" />;
   };
 
   return (
@@ -58,4 +97,5 @@ const PostItem = ({ post }) => {
   );
 };
 
-export default React.memo(PostItem); // React.memo to prevent unnecessary re-renders
+export default React.memo(PostItem);
+
