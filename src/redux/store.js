@@ -1,4 +1,4 @@
-// redux/store.js
+// src/redux/store.js
 import { configureStore } from '@reduxjs/toolkit';
 import postsReducer from './postsSlice';
 import postItemReducer from './postItemSlice'

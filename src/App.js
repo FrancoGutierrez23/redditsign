@@ -11,14 +11,18 @@ const SubredditList = lazy(() => import('./components/layout/Subreddits/Subreddi
 
 const App = () => {
   const isModalOpen = useSelector((state) => state.postItem.isModalOpen);
-
+  const posts = useSelector((state) => state.posts.posts);
+  const loading = useSelector((state) => state.posts.loading);
+  const error = useSelector((state) => state.posts.error);
   return (
     <div className="App">
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
-        <PostList />
+      <SubredditList />
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
+        <PostList posts={posts} />
         {isModalOpen && <PostComments />}
-        <SubredditList />
       </Suspense>
     </div>
   );
