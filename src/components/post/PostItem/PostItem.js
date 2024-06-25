@@ -45,6 +45,8 @@ const PostItem = ({ post }) => {
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
           onLoad={handleImageLoaded}
+          width="320" // Set explicit width
+          height="320" // Set explicit height
         />
       );
     } else if (!post.thumbnail_width) {
@@ -55,6 +57,8 @@ const PostItem = ({ post }) => {
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
           onLoad={handleImageLoaded}
+          width="320" // Set explicit width
+          height="320" // Set explicit height
         />
       );
     } else {
@@ -65,6 +69,8 @@ const PostItem = ({ post }) => {
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'} // Use 'eager' for above-the-fold images
           onLoad={handleImageLoaded}
+          width="320" // Set explicit width
+          height="320" // Set explicit height
         />
       );
     }
@@ -98,4 +104,3 @@ const PostItem = ({ post }) => {
 };
 
 export default React.memo(PostItem);
-

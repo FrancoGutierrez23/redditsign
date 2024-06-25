@@ -6,9 +6,10 @@
     padding-top: 6rem;
     padding-left: 1rem;
     list-style: none;
+    min-height: 100vh; /* Reserve space to prevent layout shifts */
 }
 
 .no_posts_fallback_text {
     padding-top: 6rem;
     min-width: 100%;
-  }
+}
