@@ -1,19 +1,30 @@
 // src/components/layout/Subreddits/SubredditList.js
 
 import './SubredditList.css';
-import React, { useState, Suspense } from 'react';
-import { useSuspenseFetch } from '../../../hooks/useSuspenseFetch';
-import { fetchPostsData } from '../../../api';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PostList from '../../post/PostList/PostList';
+import { fetchPosts } from '../../../redux/postsSlice';
 
 const SubredditList = () => {
+  const dispatch = useDispatch();
+  
+  const posts = useSelector((state) => state.posts.posts);
+  const loading = useSelector((state) => state.posts.loading);
+  const error = useSelector((state) => state.posts.error);
+
   const [selectedSubreddit, setSelectedSubreddit] = useState('pics');
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
-  // This fetches the posts for the selected subreddit using the Suspense-friendly fetch function
-  const posts = useSuspenseFetch(selectedSubreddit, () => fetchPostsData(selectedSubreddit));
+  // Fetch posts for the selected subreddit or search results
+  useEffect(() => {
+    if (!isSearchActive) {
+      dispatch(fetchPosts(selectedSubreddit));
+    }
+  }, [dispatch, selectedSubreddit, isSearchActive]);
 
-  // Log the posts data to verify
-  console.log('Fetched posts:', posts);
+  // Log the posts to verify the state after search
+  console.log('Current posts:', posts);
 
   return (
     <div className="container">
@@ -23,20 +34,22 @@ const SubredditList = () => {
           <button
             key={sub}
             className={`subreddit_option ${selectedSubreddit === sub ? 'active' : ''}`}
-            onClick={() => setSelectedSubreddit(sub)}
+            onClick={() => {
+              setSelectedSubreddit(sub);
+              setIsSearchActive(false); // Deactivate search view
+            }}
           >
             {sub}
           </button>
         ))}
       </aside>
       <main className="posts_container">
-        <Suspense fallback={<p>Loading posts...</p>}>
-          {/* Render the PostList component with the fetched posts */}
-          <PostList posts={posts} />
-        </Suspense>
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
+        <PostList posts={posts} />
       </main>
     </div>
   );
 };
 
-export default SubredditList;
+export default React.memo(SubredditList);

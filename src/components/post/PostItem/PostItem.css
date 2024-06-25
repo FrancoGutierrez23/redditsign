@@ -35,7 +35,10 @@
 
 
 /* Post's Image */
-
+.post_img {
+    width: 20rem;
+    height: auto;
+}
 
 /* Post buttons (upvotes and comments) */
 .interactions {

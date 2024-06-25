@@ -1,17 +1,18 @@
 // src/components/post/PostComments/PostComments.js
+
 import React from 'react';
 import './PostComments.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { MdClose } from 'react-icons/md';
 import { closeCommentsModal } from '../../../redux/postItemSlice';
-import PostItem from '../PostItem/PostItem'; // Import the new PostItem component
+import PostItem from '../PostItem/PostItem';
 
 const PostComments = () => {
   const dispatch = useDispatch();
-  const { post, comments, loading, error } = useSelector((state) => state.postItem);
+  const { post, comments, loading, error, isModalOpen } = useSelector((state) => state.postItem);
 
-  if (!post) {
-    return null; // Don't render anything if no post is selected
+  if (!isModalOpen) {
+    return null; // Don't render the modal if it's not open
   }
 
   const handleClose = () => {
@@ -22,7 +23,6 @@ const PostComments = () => {
     <dialog open className='comments-modal'>
       <button onClick={handleClose} className='modal-close-button'><MdClose /></button>
       <div className='modal-content'>
-        {/* Use the PostItem component to display the selected post */}
         <PostItem post={post} />
 
         <h4>Comments</h4>

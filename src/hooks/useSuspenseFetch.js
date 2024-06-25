@@ -1,3 +1,4 @@
+// src/hooks/useSuspenseFetch.js
 import React from "react";
 
 const cache = new Map();

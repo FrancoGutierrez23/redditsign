@@ -29,4 +29,4 @@ PostList.propTypes = {
   posts: PropTypes.array // Expecting an array for posts
 };
 
-export default PostList;
+export default React.memo(PostList);

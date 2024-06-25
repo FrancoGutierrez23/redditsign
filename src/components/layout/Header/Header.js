@@ -1,3 +1,4 @@
+//src/components/layout/Header/Header.js
 import './Header.css'
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -31,4 +32,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
