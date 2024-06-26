@@ -1,7 +1,7 @@
 :root {
     --hot-color: #b82121;
     --cold-color: #3d6fd4;
-    --background-color: #161c23;
+    --background-color: #000000;
     --font-color: #ecf0f1;
   }
 
@@ -13,7 +13,7 @@
     border: none;
     text-decoration: none;
     box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Source Code Pro", monospace;
   }
 
   .App {
@@ -25,3 +25,5 @@
   .problem {
     display: none;
   }
+
+  
