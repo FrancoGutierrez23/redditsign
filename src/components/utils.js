@@ -12,9 +12,17 @@ export const timeAgo = (timestamp) => {
     } else if (difference < 86400) {
       const hours = Math.floor(difference / 3600);
       return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
-    } else {
+    } else if (difference < 604800) { // Less than a week
       const days = Math.floor(difference / 86400);
       return `${days} day${days !== 1 ? 's' : ''} ago`;
+    } else if (difference < 2592000) { // Less than a month
+      const weeks = Math.floor(difference / 604800);
+      return `${weeks} week${weeks !== 1 ? 's' : ''} ago`;
+    } else if (difference < 31536000) { // Less than a year
+      const months = Math.floor(difference / 2592000);
+      return `${months} month${months !== 1 ? 's' : ''} ago`;
+    } else {
+      const years = Math.floor(difference / 31536000);
+      return `${years} year${years !== 1 ? 's' : ''} ago`;
     }
   };
-  
