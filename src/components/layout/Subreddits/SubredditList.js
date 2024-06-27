@@ -16,13 +16,13 @@ const SubredditList = () => {
   return (
     <aside className="subreddit_list">
       <h3 className="subreddits_title">Subreddits</h3>
-      {['pics', 'funny', 'nature', 'technology', 'gaming', 'paranormal'].map((sub) => (
+      {['pics', 'funny', 'nature', 'technology', 'gaming', 'paranormal', 'news', 'AskReddit', 'aww', 'todayilearned', 'science', 'movies'].map((sub) => (
         <button
           key={sub}
           className={`subreddit_option ${selectedSubreddit === sub ? 'active' : ''}`}
           onClick={() => setSelectedSubreddit(sub)}
         >
-          {sub}
+          <span className={`subreddit_option_icon ${selectedSubreddit === sub ? 'active_subreddit_option_icon' : ''}`} >{`>`}</span>{sub}
         </button>
       ))}
     </aside>

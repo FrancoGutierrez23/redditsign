@@ -21,6 +21,9 @@ const Header = () => {
 
   const handleSearchButtonClick = () => {
     setIsSearchActive(true);
+    if (searchBoxRef.current) {
+        searchBoxRef.current.focus(); // Focus on the search input when search button is clicked
+    }
   };
 
   const handleLogoClick = () => {
