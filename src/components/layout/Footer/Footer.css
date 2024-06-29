@@ -1,0 +1,34 @@
+footer {
+    height: 15rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 0.1rem solid #ffffff27;
+}
+
+/* Footer.css */
+.footer_message {
+    transition: all 0.3s ease-in-out;
+    color: #ffffff6f;
+}
+
+.footer_message.neon {
+    color: #FA5601;
+    font-weight: bold;
+    text-shadow:
+        0 0 0.4375rem #FA5601,
+        0 0 0.625rem #FA5601,
+        0 0 1.3125rem #FA5601,
+        0 0 2.625rem #FA5601,
+        0 0 5.125rem #FA5601,
+        0 0 5.75rem #FA5601,
+        0 0 6.375rem #FA5601,
+        0 0 9.4375rem #FA5601;
+    animation: twinkle 1s ease-in-out 1;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

@@ -3,6 +3,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Asynchronous thunk action to fetch posts from a subreddit
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async ({ subreddit, after = '' }, thunkAPI) => {
+  if (!subreddit) {
+    console.log('Subreddit value is empty. No need to fetch.');
+    return { posts: [], after: '' };
+  }
+
   try {
     const response = await fetch(`https://www.reddit.com/r/${subreddit}.json?after=${after}`);
     const data = await response.json();
