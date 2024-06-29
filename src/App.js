@@ -25,8 +25,8 @@ const App = () => {
         {error && <p>Error: {error}</p>}
         <PostList posts={posts} after={after} selectedSubreddit={selectedSubreddit} />
         {isModalOpen && <PostComments />}
+        <Footer />
       </Suspense>
-      <Footer />
     </div>
     
   );

@@ -1,5 +1,5 @@
 footer {
-    height: 15rem;
+    height: 10rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -9,7 +9,7 @@ footer {
 
 /* Footer.css */
 .footer_message {
-    transition: all 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out; 
     color: #ffffff6f;
 }
 
