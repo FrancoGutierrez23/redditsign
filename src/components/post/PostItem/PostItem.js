@@ -1,15 +1,21 @@
 // src/components/post/PostItem/PostItem.js
-
 import React, { useState, useEffect } from 'react';
 import './PostItem.css';
 import { useDispatch } from 'react-redux';
 import { selectPost, fetchComments } from '../../../redux/postItemSlice';
 import { timeAgo } from '../../utils';
+import upVotes from '../../../assets/up_votes.png';
+import downVotes from '../../../assets/down_votes.png';
+import turnOffArrow from '../../../assets/turn_off_arrow.png';
+import commentsIcon from '../../../assets/comments.jpg'
 
 const PostItem = ({ post }) => {
   const dispatch = useDispatch();
   const [imageLoaded, setImageLoaded] = useState(false); // State to track image loading
   const [shouldPreload, setShouldPreload] = useState(true); // State to control preload
+  const [upvoteIconSrc, setUpvoteIconSrc] = useState(turnOffArrow); // State for upvote icon
+  const [downvoteIconSrc, setDownvoteIconSrc] = useState(turnOffArrow); // State for downvote icon
+  const [voteCount, setVoteCount] = useState(post.ups); // State to track the current vote count
 
   const handleImageLoaded = () => {
     setImageLoaded(true);
@@ -35,8 +41,8 @@ const PostItem = ({ post }) => {
 
   // Helper to render post image
   const renderPostImage = () => {
-    const width = post.thumbnail_width || 320; // Default width if not provided
-    const height = post.thumbnail_height || 320; // Default height if not provided
+    const width = post.thumbnail_width * 2 || 320; // Default width if not provided
+    const height = post.thumbnail_height * 2 || 320; // Default height if not provided
 
     if (isImagePost()) {
       return (
@@ -52,15 +58,7 @@ const PostItem = ({ post }) => {
       );
     } else if (!post.thumbnail_width) {
       return (
-        <img
-          src='https://cdn.iconscout.com/icon/free/png-256/free-article-1767419-1505279.png'
-          alt={post.title}
-          className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-          loading={shouldPreload ? 'eager' : 'lazy'}
-          onLoad={handleImageLoaded}
-          width={width}
-          height={height}
-        />
+        <></>
       );
     } else {
       return (
@@ -77,6 +75,44 @@ const PostItem = ({ post }) => {
     }
   };
 
+  // Handler for upvote button click
+  const handleUpvoteClick = () => {
+    if (upvoteIconSrc === turnOffArrow) {
+      // Change to upVotes and increment the vote count
+      setUpvoteIconSrc(upVotes);
+      setVoteCount(voteCount + 1);
+
+      // If downvote is active, reset it
+      if (downvoteIconSrc === downVotes) {
+        setDownvoteIconSrc(turnOffArrow);
+        setVoteCount(voteCount + 2); // Cancel the downvote effect and add upvote effect
+      }
+    } else {
+      // Change back to turnOffArrow and decrement the vote count
+      setUpvoteIconSrc(turnOffArrow);
+      setVoteCount(voteCount - 1);
+    }
+  };
+
+  // Handler for downvote button click
+  const handleDownvoteClick = () => {
+    if (downvoteIconSrc === turnOffArrow) {
+      // Change to downVotes and decrement the vote count
+      setDownvoteIconSrc(downVotes);
+      setVoteCount(voteCount - 1);
+
+      // If upvote is active, reset it
+      if (upvoteIconSrc === upVotes) {
+        setUpvoteIconSrc(turnOffArrow);
+        setVoteCount(voteCount - 2); // Cancel the upvote effect and add downvote effect
+      }
+    } else {
+      // Change back to turnOffArrow and increment the vote count
+      setDownvoteIconSrc(turnOffArrow);
+      setVoteCount(voteCount + 1);
+    }
+  };
+
   return (
     <>
       <div className='post_info'>
@@ -90,14 +126,20 @@ const PostItem = ({ post }) => {
 
       <div className='interactions'>
         <div className='vote_container'>
-          <button className='upvote_button'>up</button>
-          <span className='ups_number'>{post.ups}</span>
-          <button className='downvote_button'>down</button>
+          <button className='upvote_button' onClick={handleUpvoteClick}>
+            <img alt='up votes' src={upvoteIconSrc} className='upvote_icon' />
+          </button>
+          <span className='ups_number'>{voteCount}</span>
+          <button className='downvote_button' onClick={handleDownvoteClick}>
+            <img alt='down votes' src={downvoteIconSrc} className='downvote_icon' />
+          </button>
         </div>
 
         <div className='comments_container'>
+          <button onClick={handleCommentsClick} className='comments_button'>
+            <img className='comments_icon' alt='comments' src={commentsIcon} />
+          </button>
           <span className='num_comments'>{post.num_comments}</span>
-          <button onClick={handleCommentsClick}>comments</button>
         </div>
       </div>
     </>

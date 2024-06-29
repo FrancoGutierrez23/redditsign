@@ -1,12 +1,12 @@
 /* Post element */
 .post {
-    width: 100%;
+    width: 95%;
+    max-width: 50rem;
 }
 
 .post_container {
     display: flex;
     flex-direction: column;
-
 }
 
 
@@ -14,12 +14,12 @@
 .post_info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     font-size: 0.75rem;
 }
 
 .post_author {
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .post_time {
@@ -30,13 +30,16 @@
 
 /* Post's title */
 .post_title {
-    font-size: 1.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
 }
 
 
 /* Post's Image */
 .post_img {
-    display: block;
+    display: inline;
+    margin-bottom: 1rem;
     opacity: 0; /* Initially hide image */
     transition: opacity 0.3s ease; /* Smooth fade-in transition */
   }
@@ -55,38 +58,37 @@
 /* Votes button */
 .vote_container {
     display: flex;
-    gap: 0.4rem;
     align-items: center;
 }
 
 .upvote_button,
 .downvote_button,
-.comment_button {
-    width: 2rem;
-    height: 2rem;
+.comments_button {
+    width: 2.5rem;
+    height: 2.5rem;
     transition: all 0.2s;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    background-color: transparent;
 }
 
 .upvote_button:hover,
 .downvote_button:hover,
-.comment_button:hover {
+.comments_button:hover {
     cursor: pointer;
     transform: scale(1.2);
 }
 
 .upvote_icon,
-.downvote_icon,
-.comment_button_icon {
-    font-size: 1.5rem;
+.downvote_icon {
+    width: 1.8rem;
 }
 
-.upvote_icon {
-    rotate: -90deg;
+.downvote_icon {
+    transform: rotate(180deg);
+    margin-left: 0.6rem;
 }
-
 
 /* Comment button */
 .comments_container {
@@ -95,3 +97,7 @@
     align-items: center;
 }
 
+.comments_icon {
+    width: 2.4rem;
+    height: auto;
+}

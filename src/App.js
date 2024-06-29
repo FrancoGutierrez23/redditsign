@@ -28,6 +28,7 @@ const App = () => {
         {isModalOpen && <PostComments />}
       </Suspense>
     </div>
+    
   );
 };
 
