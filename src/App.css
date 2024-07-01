@@ -18,8 +18,8 @@
 
   .App {
     display: flex;
-    gap: 2rem;
-    justify-content: space-between;
+    gap: 1%;
+    justify-content: center;
     flex-wrap: wrap;
   }
 

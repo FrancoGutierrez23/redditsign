@@ -3,7 +3,6 @@
 import React from 'react';
 import './PostComments.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { MdClose } from 'react-icons/md';
 import { closeCommentsModal } from '../../../redux/postItemSlice';
 import PostItem from '../PostItem/PostItem';
 
@@ -21,9 +20,9 @@ const PostComments = () => {
 
   return (
     <dialog open className='comments-modal'>
-      <button onClick={handleClose} className='modal-close-button'><MdClose /></button>
+      <button onClick={handleClose} className='modal-close-button'><span className='close_icon'>X</span></button>
       <div className='modal-content'>
-        <PostItem post={post} />
+        <PostItem post={post} className='focus' />
 
         <h4>Comments</h4>
         {loading && <p>Loading comments...</p>}

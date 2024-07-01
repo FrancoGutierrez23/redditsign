@@ -26,3 +26,9 @@ export const timeAgo = (timestamp) => {
       return `${years} year${years !== 1 ? 's' : ''} ago`;
     }
   };
+
+
+export const formatRedditText = (text) => {
+  const paragraphs = text.split('\n\n').map((paragraph, index) => `<p key=${index === 0? 'first' : 'noFirst'}>${paragraph}</p>`).join('');
+  return paragraphs;
+};

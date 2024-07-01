@@ -4,14 +4,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 600px;
-    background-color: white;
-    border: none;
+    width: 90%;
+    max-width: 62rem;
+    background-color: #000;
+    border: 0.1rem solid #ffffff96;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0rem 20rem 20rem rgba(0, 0, 0, 0.56);
     padding: 20px;
     z-index: 1000;
+    scrollbar-color: rgb(225, 125, 19) rgba(209, 98, 8, 0);
   }
   
   .comments-modal::backdrop {
@@ -20,17 +21,35 @@
   
   .modal-close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.1rem;
+    right: 0.1rem;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 1.5rem;
+  }
+
+  .close_icon {
     cursor: pointer;
+    padding-right: 0.25rem;
+    color: #fa0101;
+    font-weight: bold;
+    text-shadow:
+    0 0 0.4375rem #FA0101,
+    0 0 0.625rem #FA0101,
+    0 0 1.3125rem #FA0101,
+    0 0 2.625rem #FA0101,
+    0 0 5.125rem #FA0101,
+    0 0 5.75rem #FA0101,
+    0 0 6.375rem #FA0101,
+    0 0 9.4375rem #FA0101;
   }
   
   .modal-content {
-    max-height: 80vh;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    height: 85vh;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   
   .selected-post {
