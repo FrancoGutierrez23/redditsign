@@ -6,7 +6,6 @@ import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer/Footer'
 const PostList = lazy(() => import('./components/post/PostList/PostList'));
 const PostComments = lazy(() => import('./components/post/PostComments/PostComments'));
-const SubredditList = lazy(() => import('./components/layout/Subreddits/SubredditList'));
 
 const App = () => {
   const isModalOpen = useSelector((state) => state.postItem.isModalOpen);
@@ -20,7 +19,6 @@ const App = () => {
     <div className="App">
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
-        <SubredditList />
         {loading && <p className='problem'>Loading...</p>}
         {error && <p>Error: {error}</p>}
         <PostList posts={posts} after={after} selectedSubreddit={selectedSubreddit} />

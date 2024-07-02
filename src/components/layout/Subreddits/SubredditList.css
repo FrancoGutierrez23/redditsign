@@ -1,46 +1,73 @@
-.subreddit_list {
-    padding-top: 6rem;
-    padding-left: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
+.subreddits_list {
+    margin-right: 1rem;
 }
 
 .subreddits_title {
-    margin-bottom: 0.2rem;
-    margin-left: 0.5rem;
-    font-size: 1.5rem;
-}
-
-.subreddit_option {
-    font-size: 1.2rem;
-    text-align: start;
-    line-height: 2.25;
-    padding-left: 0.5rem;
-    transition: all 0.2s;
-    
-}
-
-.subreddit_option:hover {
-    transform: scale(1.15);
     cursor: pointer;
 }
 
-.subreddit_option_icon {
+.subreddits_title::before {
+    content: '>';
     color: #ffffff96;
     margin-right: 0.1rem;
 }
 
-.active_subreddit_option_icon {
+.subreddits_options_container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    align-items: flex-start;
+    padding: 1rem;
+    position: fixed;
+    right: 2%;
+    top: 4.5rem;
+    width: 18.75rem;
+    border: 0.1rem solid #ffffff96;
+    border-radius: 0.5rem;
+}
+
+@media only screen and (max-width: 500px) {
+    .subreddits_options_container {
+        top: 7rem;
+        right: auto;
+        left: 2%;
+    }
+}
+
+.subreddit_option {
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.75;
+}
+
+.subreddit_option:hover {
+    transform: scale(1.15);
+}
+
+.active::before {
+    content: '>';
+    margin-right: 0.1rem;
     color: #FA5601;
     font-weight: bold;
     text-shadow:
-    0 0 0.4375rem #FA5601,
-    0 0 0.625rem #FA5601,
-    0 0 1.3125rem #FA5601,
-    0 0 2.625rem #FA5601,
-    0 0 5.125rem #FA5601,
-    0 0 5.75rem #FA5601,
-    0 0 6.375rem #FA5601,
-    0 0 9.4375rem #FA5601;
+        0 0 0.4375rem #FA5601,
+        0 0 0.625rem #FA5601,
+        0 0 1.3125rem #FA5601,
+        0 0 2.625rem #FA5601,
+        0 0 5.125rem #FA5601,
+        0 0 5.75rem #FA5601,
+        0 0 6.375rem #FA5601,
+        0 0 9.4375rem #FA5601;
+}
+
+.not_active::before {
+    content: '>';
+    margin-right: 0.1rem;
+}
+
+@media only screen and (max-width: 500px) {
+    .subreddits_list {
+        margin: 1rem 0;
+    }
 }

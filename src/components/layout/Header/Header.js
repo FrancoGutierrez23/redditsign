@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchSearchResults } from '../../../redux/postsSlice';
 import logo from '../../../assets/logo_64px.jpeg'; // Import the logo image
-import searchIcon from '../../../assets/search.png'
+import searchIcon from '../../../assets/search.png';
+import SubredditList from '../Subreddits/SubredditList';
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,6 +47,7 @@ const Header = () => {
   }, [searchBoxRef]);
 
   return (
+    <>
     <header>
       <div className='logo' onClick={handleLogoClick}><img alt='logo' src={logo} style={{width: '64px', height: 'auto'}} /><h1>Redditsign</h1></div> {/* Use the imported logo */}
       <form onSubmit={handleSearchSubmit} name='search' className='search_form search-bar'>
@@ -59,7 +61,9 @@ const Header = () => {
           ref={searchBoxRef}
         />
       </form>
+      <SubredditList />
     </header>
+</>
   );
 };
 

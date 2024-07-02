@@ -9,6 +9,12 @@ header {
     z-index: 100;
 }
 
+@media only screen and (max-width: 700px) {
+    h1 {
+        display: none;
+    }
+}
+
 /* Logo */
 .logo {
     display: flex;
@@ -16,17 +22,34 @@ header {
     align-items: center;
     gap: 1rem;
     cursor: pointer;
+    z-index: 1000;
 }
 
 /* Search Form that contains the input and the search button */
 .search_form {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 1rem;
     gap: 1rem;
     height: 2rem;
     position: relative;
-    right: 18rem;
+    width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+    header {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .logo {
+        width: 13%;
+    }
+
+    .search_form {
+        width: 86%;
+    }
 }
 
 /* Search Input field */
@@ -47,7 +70,8 @@ header {
 }
 
 .search_box.active {
-    width: 15rem;
+    width: calc(100% - 5rem);
+    max-width: 25rem;
     opacity: 1;
     border-bottom-color: #FA5601;
     right: auto;
@@ -79,3 +103,4 @@ header {
     width: 2.5rem;
     height: 2.5rem;
 }
+
