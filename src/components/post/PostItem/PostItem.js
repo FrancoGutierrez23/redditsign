@@ -49,8 +49,7 @@ const PostItem = ({ post }) => {
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'}
           onLoad={handleImageLoaded}
-          width={width}
-          height={height}
+          style={{width: width, height: height}}
         />
       );
     } else if (!post.thumbnail_width) {
@@ -60,7 +59,7 @@ const PostItem = ({ post }) => {
     } else {
       return (
         <img
-          src={post.thumbnail}
+          src={post.url}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'}

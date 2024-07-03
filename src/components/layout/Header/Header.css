@@ -25,6 +25,11 @@ header {
     z-index: 1000;
 }
 
+.logo img {
+    width: 4rem;
+    height: 4rem;
+}
+
 /* Search Form that contains the input and the search button */
 .search_form {
     display: flex;
