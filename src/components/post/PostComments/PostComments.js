@@ -38,12 +38,14 @@ const PostComments = () => {
 
   const handleTextComment = (text) => {
 
-
-      return (
-        <p>
-          {text.match(/([A-Za-z0-9]+( [A-Za-z0-9]+)+)/g)}
-        </p>
-      )
+  if (text) {
+    return (
+      <p>
+        {text.match(/([A-Za-z0-9]+( [A-Za-z0-9]+)+)/g)}
+      </p>
+    )
+  }
+      
 
   }
 
