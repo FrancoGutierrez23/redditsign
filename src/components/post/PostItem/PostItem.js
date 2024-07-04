@@ -56,6 +56,16 @@ const PostItem = ({ post }) => {
       return (
         <></>
       );
+    } else if (post.is_video) {
+      return (
+        <video 
+          style={{width: width, height: height}}
+          className='post_vid'
+          loading='lazy'
+          controls>
+          <source src={post.media.reddit_video.fallback_url} type='video/mp4' />
+        </video>
+      )
     } else {
       return (
         <img

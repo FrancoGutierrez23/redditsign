@@ -7,7 +7,7 @@ import logo from '../../../assets/logo_64px.jpeg'; // Import the logo image
 import searchIcon from '../../../assets/search.png';
 import SubredditList from '../Subreddits/SubredditList';
 
-// fully implement responsive
+
 // better handling the loading and error states
 // handling videos and gif formats
 
@@ -58,6 +58,7 @@ const Header = () => {
         <button type="button" className='search_button btn-search' onClick={handleSearchButtonClick}><img alt='search' src={searchIcon} className='search_icon' /></button>
         <input 
           type="text" 
+          id='search'
           className={`search_box ${isSearchActive ? 'active' : ''}`}
           placeholder="Search posts..." 
           value={searchQuery} 
