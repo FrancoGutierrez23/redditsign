@@ -39,10 +39,12 @@
     cursor: pointer;
     transition: all 0.2s;
     line-height: 1.75;
+    width: 80%;
+    display: flex;
 }
 
 .subreddit_option:hover {
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
 
 .active::before {

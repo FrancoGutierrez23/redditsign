@@ -14,6 +14,7 @@ const App = () => {
   const error = useSelector((state) => state.posts.error);
   const after = useSelector((state) => state.posts.after);
   const selectedSubreddit = useSelector((state) => state.posts.selectedSubreddit);
+  document.cookie = "key=value; SameSite=None; Secure";
 
   return (
     <div className="App">
