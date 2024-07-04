@@ -9,7 +9,7 @@ export const fetchComments = createAsyncThunk(
       const response = await fetch(`https://www.reddit.com${trimmedPermalink}.json`);
       const data = await response.json();
       const comments = data[1].data.children.map(child => child.data);
-      console.log(comments)
+      console.log(comments);
       return comments;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
