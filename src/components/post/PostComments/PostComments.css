@@ -21,11 +21,16 @@
   
   .modal-close-button {
     position: absolute;
-    top: 0.1rem;
-    right: 0.1rem;
+    top: 0.2rem;
+    right: 0.3rem;
     background: none;
     border: none;
     font-size: 1.5rem;
+    transition: all 0.2s;
+  }
+
+  .modal-close-button:hover {
+    transform: scale(1.15);
   }
 
   .close_icon {
@@ -45,7 +50,7 @@
   }
   
   .modal-content {
-    padding-top: 0.5rem;
+    margin-top: 1rem;
     padding-right: 0.5rem;
     height: 85vh;
     overflow-y: auto;
