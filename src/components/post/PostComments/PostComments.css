@@ -72,36 +72,25 @@
     border-bottom: 1px solid #ddd;
   }
 
-  .comments_loader {
-    width: 100%;
-    height: 100%;
-    display: block;
-    margin: auto;
-    position: relative;
-    background: #000000;
-    box-sizing: border-box;
-  }
-  .comments_loader::after {
-    content: '';
-    width: calc(100% - 1.875rem); 
-    height: calc(100% - 1rem); 
-    top: 1rem;
-    left: 1rem;
-    position: absolute;
-    background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5) 50%, transparent 100%),
-     linear-gradient(#dddddd80 6.25rem, transparent 0), 
-     linear-gradient(#dddddd80 1rem, transparent 0), 
-     linear-gradient(#dddddd80 3.125rem, transparent 0); 
-    background-repeat: no-repeat;
-    background-size: 4.688rem 10.938rem, 100% 6.25rem, 100% 1rem, 100% 1.875rem; 
-    background-position: -11.563rem 0, center 0, center 7.188rem, center 8.875rem; 
-    box-sizing: border-box;
-    animation: animloader 1s linear infinite;
-  }
-  
-  @keyframes animloader {
-    to {
-      background-position: 11.563rem 0, center 0, center 7.188rem, center 8.875rem; 
-    }
-  }
-  
+/* HTML: <div class="comments_loader"></div> */
+.comments_loader {
+  margin-top: 1rem;
+  width: 100%;
+  aspect-ratio: 1;
+  --c: no-repeat linear-gradient(#ffffff35 0 0);
+  background: 
+    var(--c) 0% 100%,
+    var(--c) 20% 100%,
+    var(--c) 40% 100%,
+    var(--c) 60% 100%;
+  animation: l2 1s infinite linear;
+  transform: rotate(90deg);
+}
+@keyframes l2 {
+  0%  {background-size: 10% 100%,10% 100%,10% 100%,10% 100%}
+  20% {background-size: 10% 60% ,10% 100%,10% 100%,10% 100%}
+  40% {background-size: 10% 80% ,10% 60% ,10% 100%,10% 100%}
+  60% {background-size: 10% 100%,10% 80% ,10% 60% ,10% 100%}
+  80% {background-size: 10% 100%,10% 100%,10% 80% ,10% 60% }
+  100%{background-size: 10% 100%,10% 100%,10% 100%,10% 100%}
+}

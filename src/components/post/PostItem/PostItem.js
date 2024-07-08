@@ -66,6 +66,27 @@ const PostItem = ({ post }) => {
           <source src={post.media.reddit_video.fallback_url} type='video/mp4' />
         </video>
       )
+    } else if(post.url.includes('gallery')) {
+      
+      const imgId = post.gallery_data.items[0].media_id;
+      const imgOrigin = post.media_metadata[imgId].s.u
+      const imageRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg))/i;
+      const match = imgOrigin.match(imageRegex);
+  
+      if (match) {
+        const imageUrl = match[0];
+        return (
+          <img
+            src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)} // Assuming you need to modify the URL for some reason
+            alt="comment-img"
+            width={width}
+            height={height}
+            onLoad={handleImageLoaded}
+            className={`post_img ${imageLoaded ? 'loaded' : ''}`}
+            loading={shouldPreload ? 'eager' : 'lazy'}
+          />
+        );
+      }
     } else {
       return (
         <img

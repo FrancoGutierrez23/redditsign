@@ -1,6 +1,4 @@
 :root {
-    --hot-color: #b82121;
-    --cold-color: #3d6fd4;
     --background-color: #000000;
     --font-color: #ecf0f1;
   }
@@ -42,6 +40,7 @@
         0 0 5.75rem #01c8fa,
         0 0 6.375rem #01c8fa,
         0 0 9.4375rem #01c8fa;
+    margin-bottom: 100vh;
   }
   .loader::after {
     content: '';  

@@ -1,10 +1,11 @@
 footer {
-    height: 10rem;
+    height: 6rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-top: 0.1rem solid #ffffff27;
+    margin-top: 2rem;
 }
 
 /* Footer.css */
