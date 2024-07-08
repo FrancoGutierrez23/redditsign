@@ -19,9 +19,9 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <Suspense fallback={<div>Loading...</div>}>
-        {loading && <p className='problem'>Loading...</p>}
-        {error && <p>Error: {error}</p>}
+      <Suspense>
+        {loading && <span className="loader">Loading</span>}
+        {error && <span className='posts_error'>Error: {error}</span>}
         <PostList posts={posts} after={after} selectedSubreddit={selectedSubreddit} />
         {isModalOpen && <PostComments />}
         <Footer />

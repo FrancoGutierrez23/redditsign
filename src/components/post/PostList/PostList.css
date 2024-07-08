@@ -26,3 +26,11 @@
         width: 90%;
     }
   }
+
+  .no_posts_fallback_text {
+    display: none;
+  }
+
+  .no_posts_fallback_text.show {
+    display: block;
+}
