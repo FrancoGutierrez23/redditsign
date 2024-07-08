@@ -44,7 +44,7 @@ const PostItem = ({ post }) => {
     if (isImagePost()) {
       return (
         <img
-          src={post.url.includes('jpeg' || 'jpg' || 'png')? post.url : post.thumbnail}
+          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg')? post.url : post.thumbnail}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'}
@@ -90,7 +90,7 @@ const PostItem = ({ post }) => {
     } else {
       return (
         <img
-          src={post.url.includes('jpeg' || 'jpg' || 'png')? post.url : post.thumbnail}
+          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg')? post.url : post.thumbnail}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'}
