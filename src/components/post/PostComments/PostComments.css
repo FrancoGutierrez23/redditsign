@@ -11,7 +11,7 @@
     border-radius: 8px;
     box-shadow: 0 0rem 20rem 20rem rgba(0, 0, 0, 0.56);
     padding: 20px;
-    z-index: 1000;
+    z-index: 3000;
     scrollbar-color: rgb(225, 125, 19) rgba(209, 98, 8, 0);
   }
   

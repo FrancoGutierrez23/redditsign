@@ -20,7 +20,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Suspense>
-        {loading && <span className="loader">Loading</span>}
+        {loading && <div className='wrapper'><span className="loader">Loading</span></div>}
         {error && <span className='posts_error'>Error: {error}</span>}
         <PostList posts={posts} after={after} selectedSubreddit={selectedSubreddit} />
         {isModalOpen && <PostComments />}

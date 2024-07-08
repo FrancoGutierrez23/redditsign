@@ -22,6 +22,7 @@ const Header = () => {
     if (searchQuery.trim() !== '') {
       dispatch(fetchSearchResults(searchQuery));
     }
+    window.scrollTo(0, 0);
   };
 
   const handleSearchButtonClick = () => {

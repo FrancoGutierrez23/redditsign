@@ -21,6 +21,13 @@
     flex-wrap: wrap;
   }
 
+.wrapper {
+  width: 100%;
+  height: 100%; 
+  position: absolute;
+  z-index: 999;
+}
+
   .loader {
     color: #01c8fa;
     display: inline-block;
