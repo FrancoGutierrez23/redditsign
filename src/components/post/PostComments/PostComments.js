@@ -58,7 +58,7 @@ const PostComments = () => {
         <PostItem post={post} className="focus" />
 
         <h4>Comments</h4>
-        {loading && <p>Loading comments...</p>}
+        {loading && <span className='comments_loader'></span>}
         {error && <p>Error loading comments: {error}</p>}
         {!loading && comments.length === 0 && (
           <span className="posts_fallback">No comments available.</span>

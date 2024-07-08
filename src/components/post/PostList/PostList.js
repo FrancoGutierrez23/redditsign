@@ -24,7 +24,7 @@ const PostList = ({ posts }) => {
   return (
     <main className='posts-list'>
       {posts.length === 0 ? (
-        <p className='no_posts_fallback_text' defer>No posts available.</p>
+        <p className='no_posts_fallback_text'>No posts available.</p>
       ) : (
         <ul className='posts_container'>
           {posts.map((post) => (
