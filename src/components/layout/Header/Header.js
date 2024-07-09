@@ -7,10 +7,6 @@ import logo from '../../../assets/logo_64px.jpeg'; // Import the logo image
 import searchIcon from '../../../assets/search.png';
 import SubredditList from '../Subreddits/SubredditList';
 
-
-// better handling the loading and error states
-// handling videos and gif formats
-
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchActive, setIsSearchActive] = useState(false);
