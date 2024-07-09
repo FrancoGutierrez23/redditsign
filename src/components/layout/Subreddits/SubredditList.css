@@ -4,6 +4,7 @@
 
 .subreddits_title {
     cursor: pointer;
+    font-size: 1.17rem;
 }
 
 .subreddits_title::before {

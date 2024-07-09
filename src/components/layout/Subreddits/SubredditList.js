@@ -23,7 +23,11 @@ const SubredditList = () => {
   };
 
   const handleSubredditClick = (sub) => {
-    setSelectedSubreddit(sub);
+    if (sub === 'pics') {
+      window.location.reload()
+    } else {
+      setSelectedSubreddit(sub);
+    }
     setIsListVisible(false); // Hide the list when a subreddit is selected
   };
 
