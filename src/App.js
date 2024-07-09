@@ -1,9 +1,9 @@
 // src/App.js
-import React, { Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import './App.css';
 import Header from './components/layout/Header/Header';
-import Footer from './components/layout/Footer/Footer'
+import Footer from './components/layout/Footer/Footer';
 const PostList = lazy(() => import('./components/post/PostList/PostList'));
 const PostComments = lazy(() => import('./components/post/PostComments/PostComments'));
 
@@ -14,7 +14,39 @@ const App = () => {
   const error = useSelector((state) => state.posts.error);
   const after = useSelector((state) => state.posts.after);
   const selectedSubreddit = useSelector((state) => state.posts.selectedSubreddit);
-  document.cookie = "key=value; SameSite=None; Secure";
+
+  useEffect(() => {
+    document.cookie = "key=value; SameSite=None; Secure";
+
+    let socket = new WebSocket('wss://example.com/socket');
+
+    socket.onopen = () => {
+      console.log('WebSocket connected');
+    };
+
+    socket.onmessage = (event) => {
+      console.log('Message from server:', event.data);
+    };
+
+    socket.onclose = () => {
+      console.log('WebSocket disconnected');
+    };
+
+    const closeWebSocket = () => {
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.close();
+      }
+    };
+
+    window.addEventListener('beforeunload', closeWebSocket);
+    window.addEventListener('pagehide', closeWebSocket);
+
+    return () => {
+      closeWebSocket();
+      window.removeEventListener('beforeunload', closeWebSocket);
+      window.removeEventListener('pagehide', closeWebSocket);
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -27,9 +59,7 @@ const App = () => {
         <Footer />
       </Suspense>
     </div>
-    
   );
 };
 
 export default React.memo(App);
-
