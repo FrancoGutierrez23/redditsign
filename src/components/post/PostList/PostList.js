@@ -34,7 +34,7 @@ const PostList = ({ posts }) => {
           ))}
         </ul>
       )}
-      {isFetching && <p>Loading more posts...</p>}
+      {isFetching && <></>}
     </main>
   );
 };
