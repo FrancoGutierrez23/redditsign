@@ -29,6 +29,9 @@ export const timeAgo = (timestamp) => {
 
 
 export const formatRedditText = (text) => {
-  const paragraphs = text.split('\n\n').map((paragraph, index) => `<p key=${index === 0? 'first' : 'noFirst'}>${paragraph}</p>`).join('');
+  if (!text) return ''; // Return an empty string or some default value if text is undefined
+  const paragraphs = text.split('\n\n')
+    .map((paragraph, index) => `<p key=${index === 0 ? 'first' : 'noFirst'}>${paragraph}</p>`)
+    .join('');
   return paragraphs;
 };

@@ -9,13 +9,20 @@ import turnOffArrow from '../../../assets/turn_off_arrow.png';
 import commentsIcon from '../../../assets/comments.jpg';
 import { formatRedditText } from '../../utils'; // Import the format function
 
+const formatCommentsCount = (numComments) => {
+  if (typeof numComments === 'number') {
+    return numComments.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  return "0"; // Default display if num_comments is not a number or undefined
+};
+
 const PostItem = ({ post }) => {
   const dispatch = useDispatch();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [shouldPreload, setShouldPreload] = useState(true);
   const [upvoteIconSrc, setUpvoteIconSrc] = useState(turnOffArrow);
   const [downvoteIconSrc, setDownvoteIconSrc] = useState(turnOffArrow);
-  const [voteCount, setVoteCount] = useState(post.ups);
+  const [voteCount, setVoteCount] = useState(post.ups || 0); // Ensure voteCount is initialized to 0 if undefined
 
   const handleImageLoaded = () => {
     setImageLoaded(true);
@@ -34,7 +41,7 @@ const PostItem = ({ post }) => {
 
   const isImagePost = () => {
     const imageFormats = ['jpeg', 'jpg', 'png'];
-    return imageFormats.some(format => post.url.includes(format));
+    return imageFormats.some(format => post?.url?.includes(format));
   };
 
   const renderPostImage = () => {
@@ -130,6 +137,14 @@ const PostItem = ({ post }) => {
     }
   };
 
+  const renderVoteCount = () => {
+    // Safely handle voteCount formatting
+    if (typeof voteCount === 'number') {
+      return voteCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return "0"; // Default display if voteCount is not a number
+  };
+
   return (
     <>
       <div className='post_info'>
@@ -149,7 +164,7 @@ const PostItem = ({ post }) => {
           <button className='upvote_button' onClick={handleUpvoteClick}>
             <img alt='up votes' src={upvoteIconSrc} className='upvote_icon' />
           </button>
-          <span className='ups_number'>{voteCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+          <span className='ups_number'>{renderVoteCount()}</span>
           <button className='downvote_button' onClick={handleDownvoteClick}>
             <img alt='down votes' src={downvoteIconSrc} className='downvote_icon' />
           </button>
@@ -159,7 +174,7 @@ const PostItem = ({ post }) => {
           <button onClick={handleCommentsClick} className='comments_button'>
             <img className='comments_icon' alt='comments' src={commentsIcon} />
           </button>
-          <span className='num_comments'>{post.num_comments.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+          <span className='num_comments'>{formatCommentsCount(post.num_comments)}</span>
         </div>
       </div>
     </>
@@ -167,4 +182,3 @@ const PostItem = ({ post }) => {
 };
 
 export default React.memo(PostItem);
-
