@@ -45,23 +45,19 @@ const PostItem = ({ post }) => {
   };
 
   const renderPostImage = () => {
-    const width = post.thumbnail_width * 2 || 320;
-    const height = post.thumbnail_height * 2 || 320;
+    const width = (post.thumbnail_width * 2) || 320;
+    const height = (post.thumbnail_height * 2) || 320;
 
     if (isImagePost()) {
       return (
         <img
-          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg')? post.url : post.thumbnail}
+          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') ? post.url : post.thumbnail}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'}
           onLoad={handleImageLoaded}
           style={{width: width, height: height}}
         />
-      );
-    } else if (!post.thumbnail_width) {
-      return (
-        <></>
       );
     } else if (post.is_video) {
       return (
@@ -73,31 +69,32 @@ const PostItem = ({ post }) => {
           <source src={post.media.reddit_video.fallback_url} type='video/mp4' />
         </video>
       )
-    } else if(post.url.includes('gallery')) {
-      
+    } else if(post.url.includes('gallery') && post.gallery_data && post.media_metadata) {
       const imgId = post.gallery_data.items[0].media_id;
-      const imgOrigin = post.media_metadata[imgId].s.u
-      const imageRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg))/i;
-      const match = imgOrigin.match(imageRegex);
-  
-      if (match) {
-        const imageUrl = match[0];
-        return (
-          <img
-            src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)} // Assuming you need to modify the URL for some reason
-            alt="comment-img"
-            width={width}
-            height={height}
-            onLoad={handleImageLoaded}
-            className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-            loading={shouldPreload ? 'eager' : 'lazy'}
-          />
-        );
+      const imgOrigin = post.media_metadata[imgId]?.s?.u; // Ensure imgOrigin is not undefined
+      if (imgOrigin) {
+        const imageRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg))/i;
+        const match = imgOrigin.match(imageRegex);
+        if (match) {
+          const imageUrl = match[0];
+          return (
+            <img
+              src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)} // Assuming you need to modify the URL for some reason
+              alt="comment-img"
+              width={width}
+              height={height}
+              onLoad={handleImageLoaded}
+              className={`post_img ${imageLoaded ? 'loaded' : ''}`}
+              loading={shouldPreload ? 'eager' : 'lazy'}
+            />
+          );
+        }
       }
+      return null;
     } else {
       return (
         <img
-          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg')? post.url : post.thumbnail}
+          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') ? post.url : post.thumbnail}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'}

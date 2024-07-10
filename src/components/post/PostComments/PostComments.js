@@ -33,6 +33,8 @@ const PostComments = () => {
           className="comment_img" // Add a class for styling purposes
         />
       );
+    } else {
+      return null;
     }
   };
 
@@ -41,9 +43,11 @@ const PostComments = () => {
   if (text) {
     return (
       <p>
-        {text.match(/([A-Za-z0-9]+( [A-Za-z0-9]+)+)/g)}
+        {text.match(/([A-Za-z0-9]+( [A-Za-z0-9]+)+)/g) || null}
       </p>
     )
+  } else {
+    return null;
   }
       
 

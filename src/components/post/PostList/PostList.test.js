@@ -132,7 +132,5 @@ describe('PostList Component', () => {
     await fetchMorePosts();
 
     expect(mockDispatch).toHaveBeenCalledWith(fetchPosts({ subreddit: 'testsubreddit', after: 'test_after' }));
-
-
   });
 });
