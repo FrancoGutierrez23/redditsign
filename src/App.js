@@ -19,18 +19,6 @@ const App = () => {
 
     let socket = new WebSocket('wss://example.com/socket');
 
-    socket.onopen = () => {
-      console.log('WebSocket connected');
-    };
-
-    socket.onmessage = (event) => {
-      console.log('Message from server:', event.data);
-    };
-
-    socket.onclose = () => {
-      console.log('WebSocket disconnected');
-    };
-
     const closeWebSocket = () => {
       if (socket.readyState === WebSocket.OPEN) {
         socket.close();
