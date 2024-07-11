@@ -2,14 +2,14 @@
 
 This is a portfolio project that consists of a redesign of the Reddit web using the Reddit JSON API. The project allows users to browse posts from various subreddits, view comments, and interact with posts through voting. 
 
+You can view the live project [here](https://main--redditsign.netlify.app).
+
 ## Table of Contents
 - [Features](#features)
 - [Components](#components)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Future Features](#future-features)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 - Browse posts from various subreddits
