@@ -6,7 +6,7 @@ import PostItem from '../PostItem/PostItem';
 
 const PostComments = () => {
   const dispatch = useDispatch();
-  const { post, comments, loading, error, isModalOpen } = useSelector((state) => state.postItem);
+  const { post, comments = [], loading, error, isModalOpen } = useSelector((state) => state.postItem);
 
   if (!isModalOpen) {
     return null; // Don't render the modal if it's not open
@@ -54,9 +54,9 @@ const PostComments = () => {
   }
 
   return (
-    <dialog open className="comments-modal">
+    <div open className="comments-modal" role="dialog">
       <button onClick={handleClose} className="modal-close-button">
-        <span className="close_icon">X</span>
+        <span className="close_icon" alt="close">X</span>
       </button>
       <div className="modal-content">
         <PostItem post={post} className="focus" />
@@ -64,12 +64,12 @@ const PostComments = () => {
         <h4>Comments</h4>
         {loading && <div className="comments_loader" data-testid="comments-loader"></div>}
         {error && <p>Error loading comments: {error}</p>}
-        {!loading && comments.length === 0 && (
+        {!loading && comments && comments.length === 0 && (
           <span className="posts_fallback">No comments available.</span>
         )}
         <ul className="comments-list">
           {comments.map((comment) => (
-            <li key={comment.id}>
+            <li key={comment.id} data-testid="comment">
               <p>
                 <strong>{comment.author? `${comment.author}:` : null}</strong>
               </p>
@@ -79,7 +79,7 @@ const PostComments = () => {
           ))}
         </ul>
       </div>
-    </dialog>
+    </div>
   );
 };
 

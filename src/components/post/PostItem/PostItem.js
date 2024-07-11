@@ -22,7 +22,7 @@ const PostItem = ({ post }) => {
   const [shouldPreload, setShouldPreload] = useState(true);
   const [upvoteIconSrc, setUpvoteIconSrc] = useState(turnOffArrow);
   const [downvoteIconSrc, setDownvoteIconSrc] = useState(turnOffArrow);
-  const [voteCount, setVoteCount] = useState(post.ups || 0); // Ensure voteCount is initialized to 0 if undefined
+  const [voteCount, setVoteCount] = useState(post ? post.ups || 0 : 0); // Ensure voteCount is initialized to 0 if undefined
 
   const handleImageLoaded = () => {
     setImageLoaded(true);
@@ -69,7 +69,7 @@ const PostItem = ({ post }) => {
           <source src={post.media.reddit_video.fallback_url} type='video/mp4' />
         </video>
       )
-    } else if(post.url.includes('gallery') && post.gallery_data && post.media_metadata) {
+    } else if(post.url && post.url.includes('gallery') && post.gallery_data && post.media_metadata) {
       const imgId = post.gallery_data.items[0].media_id;
       const imgOrigin = post.media_metadata[imgId]?.s?.u; // Ensure imgOrigin is not undefined
       if (imgOrigin) {
@@ -149,7 +149,7 @@ const PostItem = ({ post }) => {
         <span className='post_time'>{timeAgo(post.created)}</span>
       </div>
 
-      <h3 className='post_title' onClick={handleCommentsClick}>{post.title}</h3>
+      <h3 className='post_title' onClick={handleCommentsClick} >{post.title}</h3>
 
         
         <div onClick={handleCommentsClick} dangerouslySetInnerHTML={{__html: formatRedditText(post.selftext)}}></div>
@@ -168,7 +168,7 @@ const PostItem = ({ post }) => {
         </div>
 
         <div className='comments_container' onClick={handleCommentsClick}>
-          <button onClick={handleCommentsClick} className='comments_button'>
+          <button onClick={handleCommentsClick} className='comments_button' data-testid="comments-button">
             <img className='comments_icon' alt='comments' src={commentsIcon} />
           </button>
           <span className='num_comments'>{formatCommentsCount(post.num_comments)}</span>
