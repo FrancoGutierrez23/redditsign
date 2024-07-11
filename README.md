@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Redditsign
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a portfolio project that consists of a redesign of the Reddit web using the Reddit JSON API. The project allows users to browse posts from various subreddits, view comments, and interact with posts through voting. 
 
-## Available Scripts
+## Table of Contents
+- [Features](#features)
+- [Components](#components)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Future Features](#future-features)
+- [Contributing](#contributing)
+- [License](#license)
 
-In the project directory, you can run:
+## Features
+- Browse posts from various subreddits
+- View comments on posts
+- Upvote and downvote posts
+- Search for specific subreddits and posts
+- Responsive design
 
-### `npm start`
+## Components
+### Header
+- Displays the logo
+- Handles the search function
+- Displays the `SubredditList` (a dropdown list with the prefixed subreddits to navigate to)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### SubredditList
+- A list of possible subreddits to navigate to
+- Manages the subreddit change and the `selectedSubreddit` state
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Footer
+- Displays a simple span element
 
-### `npm test`
+### PostItem
+- Manages the logic of each post
+- Displays author, subreddit where it was posted, time ago, title, text (if any), media (image or video, if any)
+- Handles votes (with the possibility to upvote or downvote)
+- Comments button (on click, displays the `PostComments` component showing the post and comments)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### PostList
+- Displays a list of `PostItem` components for each post object returned by the API
 
-### `npm run build`
+### PostComments
+- Displays a modal when clicked in certain parts of the `PostItem` showing the full post and comments
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### App
+- Renders all the above components in the right order
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
+To run this project locally, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/FrancoGutierrez23/redditsign.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd redditsign
+    ```
+3. Install dependencies:
+    ```sh
+    npm install
+    ```
+4. Start the development server:
+    ```sh
+    npm start
+    ```
+**Note:** You can launch the test runner with `npm test`. Each component have a test file.
 
-### `npm run eject`
+## Usage
+- The app will start on `http://localhost:3000`
+- Use the search bar in the `Header` to find specific content
+- Navigate through the subreddit list using the `SubredditList` dropdown
+- Click on a post’s comment button to view comments in a modal
+- Upvote or downvote posts using the vote buttons
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Future Features
+- Zoom on images
+- Display galleries
+- Personalize subreddit list
+- Ability to navigate to a subreddit by clicking the subreddit name in a post
+- Ability to comment
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
