@@ -1,4 +1,3 @@
-// src/hooks/useInfiniteScroll.js
 import { useEffect, useState } from 'react';
 
 const useInfiniteScroll = (callback) => {

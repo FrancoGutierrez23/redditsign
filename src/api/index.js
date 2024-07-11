@@ -1,4 +1,3 @@
-// src/api/index.js
 export const fetchPostsData = async (subreddit = 'all') => {
     const response = await fetch(`https://www.reddit.com/r/${subreddit}.json`);
     if (!response.ok) {

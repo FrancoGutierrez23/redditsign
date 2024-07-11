@@ -1,4 +1,3 @@
-// src/components/layout/Header/Header.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useDispatch } from 'react-redux';

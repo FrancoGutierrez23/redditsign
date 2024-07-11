@@ -1,4 +1,3 @@
-// src/components/post/PostList/PostList.test.js
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,7 +36,7 @@ const mockPosts = [
       thumbnail_width: 100,
       thumbnail_height: 100,
       is_video: false,
-      url: 'https://example.com/test1.jpg', // Ensure url is included
+      url: 'https://example.com/test1.jpg',
     },
   },
   {
@@ -56,7 +55,7 @@ const mockPosts = [
       thumbnail_width: 100,
       thumbnail_height: 100,
       is_video: false,
-      url: 'https://example.com/test2.jpg', // Ensure url is included
+      url: 'https://example.com/test2.jpg',
     },
   },
 ];

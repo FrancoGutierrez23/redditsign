@@ -1,9 +1,8 @@
-// src/components/layout/PostItem/PostItem.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
 import PostItem from './PostItem';
-import { selectPost, fetchComments } from '../../../redux/postItemSlice'; // Ensure these actions are imported correctly
+import { selectPost, fetchComments } from '../../../redux/postItemSlice';
 import upVotes from '../../../assets/up_votes.png';
 import downVotes from '../../../assets/down_votes.png';
 import turnOffArrow from '../../../assets/turn_off_arrow.png';

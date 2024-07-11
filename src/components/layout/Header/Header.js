@@ -50,7 +50,7 @@ const Header = () => {
   return (
     <>
     <header>
-      <div className='logo' onClick={handleLogoClick}><img alt='logo' src={logo} /><h1>Redditsign</h1></div> {/* Use the imported logo */}
+      <div className='logo' onClick={handleLogoClick}><img alt='logo' src={logo} /><h1>Redditsign</h1></div>
       <form onSubmit={handleSearchSubmit} name='search' className='search_form search-bar'>
         <button type="button" className='search_button btn-search' onClick={handleSearchButtonClick}><img alt='search' src={searchIcon} className='search_icon' /></button>
         <input 

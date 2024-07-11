@@ -1,4 +1,3 @@
-// src/redux/postsSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Asynchronous thunk action to fetch posts from a subreddit
@@ -21,7 +20,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async ({ subreddi
 
     return { posts: data.data.children, after: data.data.after };
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message); // Handle error
+    return thunkAPI.rejectWithValue(error.message); 
   }
 });
 
@@ -32,7 +31,7 @@ export const fetchSearchResults = createAsyncThunk('posts/fetchSearchResults', a
     const data = await response.json();
     return data.data.children;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message); // Handle error
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 

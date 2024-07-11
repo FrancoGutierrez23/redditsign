@@ -1,4 +1,3 @@
-// src/components/post/PostList/PostList.js
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../../../redux/postsSlice';

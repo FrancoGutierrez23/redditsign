@@ -1,6 +1,4 @@
-// src/redux/actions/postActions.js
 import { FETCH_POSTS_REQUEST, FETCH_POSTS_SUCCESS, FETCH_POSTS_FAILURE } from './types';
-
 
 // Action to fetch posts from a subreddit
 export const fetchPosts = (subreddit) => async (dispatch) => {

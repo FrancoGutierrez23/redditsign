@@ -7,13 +7,13 @@ import upVotes from '../../../assets/up_votes.png';
 import downVotes from '../../../assets/down_votes.png';
 import turnOffArrow from '../../../assets/turn_off_arrow.png';
 import commentsIcon from '../../../assets/comments.jpg';
-import { formatRedditText } from '../../utils'; // Import the format function
+import { formatRedditText } from '../../utils';
 
 const formatCommentsCount = (numComments) => {
   if (typeof numComments === 'number') {
     return numComments.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  return "0"; // Default display if num_comments is not a number or undefined
+  return "0";
 };
 
 const PostItem = ({ post }) => {
@@ -22,7 +22,7 @@ const PostItem = ({ post }) => {
   const [shouldPreload, setShouldPreload] = useState(true);
   const [upvoteIconSrc, setUpvoteIconSrc] = useState(turnOffArrow);
   const [downvoteIconSrc, setDownvoteIconSrc] = useState(turnOffArrow);
-  const [voteCount, setVoteCount] = useState(post ? post.ups || 0 : 0); // Ensure voteCount is initialized to 0 if undefined
+  const [voteCount, setVoteCount] = useState(post ? post.ups || 0 : 0);
 
   const handleImageLoaded = () => {
     setImageLoaded(true);
@@ -71,7 +71,7 @@ const PostItem = ({ post }) => {
       )
     } else if(post.url && post.url.includes('gallery') && post.gallery_data && post.media_metadata) {
       const imgId = post.gallery_data.items[0].media_id;
-      const imgOrigin = post.media_metadata[imgId]?.s?.u; // Ensure imgOrigin is not undefined
+      const imgOrigin = post.media_metadata[imgId]?.s?.u;
       if (imgOrigin) {
         const imageRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg))/i;
         const match = imgOrigin.match(imageRegex);
@@ -79,7 +79,7 @@ const PostItem = ({ post }) => {
           const imageUrl = match[0];
           return (
             <img
-              src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)} // Assuming you need to modify the URL for some reason
+              src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)}
               alt="comment-img"
               width={width}
               height={height}
@@ -139,7 +139,7 @@ const PostItem = ({ post }) => {
     if (typeof voteCount === 'number') {
       return voteCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    return "0"; // Default display if voteCount is not a number
+    return "0";
   };
 
   return (

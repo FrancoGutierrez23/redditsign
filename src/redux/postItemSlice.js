@@ -1,4 +1,3 @@
-// redux/postItemSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchComments = createAsyncThunk(
@@ -24,7 +23,7 @@ const postItemSlice = createSlice({
     comments: [],
     loading: false,
     error: null,
-    isModalOpen: false, // Add a state for modal visibility
+    isModalOpen: false,
   },
   reducers: {
     selectPost: (state, action) => {

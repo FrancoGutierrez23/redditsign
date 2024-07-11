@@ -27,10 +27,10 @@ const PostComments = () => {
       const imageUrl = match[0];
       return (
         <img
-          src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)} // Assuming you need to modify the URL for some reason
+          src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)} 
           alt="comment-img"
           width="320px"
-          className="comment_img" // Add a class for styling purposes
+          className="comment_img"
         />
       );
     } else {
@@ -39,7 +39,6 @@ const PostComments = () => {
   };
 
   const handleTextComment = (text) => {
-
   if (text) {
     return (
       <p>
@@ -49,9 +48,7 @@ const PostComments = () => {
   } else {
     return null;
   }
-      
-
-  }
+};
 
   return (
     <div open className="comments-modal" role="dialog">

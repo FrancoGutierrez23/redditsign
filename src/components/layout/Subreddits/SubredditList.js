@@ -1,4 +1,3 @@
-// src/components/layout/Subreddits/SubredditList.js
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchPosts, resetPosts } from '../../../redux/postsSlice';
@@ -7,8 +6,8 @@ import './SubredditList.css';
 const SubredditList = () => {
   const dispatch = useDispatch();
   const [selectedSubreddit, setSelectedSubreddit] = useState('pics');
-  const [isListVisible, setIsListVisible] = useState(false); // State to control visibility of the list
-  const listRef = useRef(null); // Ref to track the list container
+  const [isListVisible, setIsListVisible] = useState(false);
+  const listRef = useRef(null);
 
   useEffect(() => {
     dispatch(resetPosts()); // Reset posts when subreddit changes
@@ -44,7 +43,7 @@ const SubredditList = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside); // Clean up event listener
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isListVisible]);
 
@@ -53,7 +52,7 @@ const SubredditList = () => {
       <h3 className="subreddits_title" onClick={toggleListVisibility}>
         Subreddits
       </h3>
-      {isListVisible && ( // Conditionally render the list based on visibility state
+      {isListVisible && (
         <div className='subreddits_options_container'>
           {[
             'pics', 'funny', 'nature', 'technology', 'gaming',

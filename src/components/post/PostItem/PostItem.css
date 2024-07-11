@@ -65,11 +65,11 @@ dialog p {
     cursor: pointer;
     margin-bottom: 1rem;
     opacity: 0;
-    transition: opacity 0.3s ease; /* Smooth fade-in transition */
+    transition: opacity 0.3s ease;
   }
   
   .post_img.loaded {
-    opacity: 1; /* Show image when loaded */
+    opacity: 1;
   }
 
 /* Post buttons (upvotes and comments) */

@@ -1,4 +1,4 @@
-/* src/components/post/PostItem/PostComments.css */
+/* Modal */
 .comments-modal {
     position: fixed;
     top: 50%;
@@ -19,6 +19,8 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
   
+
+  /* Modal close button */
   .modal-close-button {
     position: absolute;
     top: 0.2rem;
@@ -48,7 +50,9 @@
     0 0 6.375rem #FA0101,
     0 0 9.4375rem #FA0101;
   }
-  
+
+
+  /* Modal content */
   .modal-content {
     margin-top: 1rem;
     padding-right: 0.5rem;
@@ -61,6 +65,8 @@
     margin-bottom: 20px;
   }
   
+
+  /* Comments */
   .comments-list {
     list-style-type: none;
     padding: 0;
@@ -72,7 +78,7 @@
     border-bottom: 1px solid #ddd;
   }
 
-/* HTML: <div class="comments_loader"></div> */
+/* Loader */
 .comments_loader {
   margin-top: 1rem;
   width: 100%;

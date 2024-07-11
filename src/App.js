@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import './App.css';

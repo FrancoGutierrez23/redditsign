@@ -1,3 +1,9 @@
+/* PostList */
+.posts-list {
+    width: 70%;
+    min-height: 100vh;
+}
+
 .posts_container {
     display: flex;
     width: 100%;
@@ -5,11 +11,6 @@
     gap: 3rem;
     padding-top: 7rem;
     list-style: none;
-}
-
-.posts-list {
-    width: 70%;
-    min-height: 100vh;
 }
 
 .no_posts_fallback_text {
