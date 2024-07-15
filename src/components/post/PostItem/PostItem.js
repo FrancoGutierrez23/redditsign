@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './PostItem.css';
 import { useDispatch } from 'react-redux';
 import { selectPost, fetchComments } from '../../../redux/postItemSlice';
-import { timeAgo } from '../../utils';
 import upVotes from '../../../assets/up_votes.png';
 import downVotes from '../../../assets/down_votes.png';
 import turnOffArrow from '../../../assets/turn_off_arrow.png';
 import commentsIcon from '../../../assets/comments.jpg';
-import { formatRedditText } from '../../utils';
+import { formatRedditText, timeAgo } from '../../utils';
+import { handleMedia } from './handleMediaHelper';
 
 const formatCommentsCount = (numComments) => {
   if (typeof numComments === 'number') {
@@ -44,67 +44,6 @@ const PostItem = ({ post }) => {
     return imageFormats.some(format => post?.url?.includes(format));
   };
 
-  const renderPostImage = () => {
-    const width = (post.thumbnail_width * 2) || 320;
-    const height = (post.thumbnail_height * 2) || 320;
-
-    if (isImagePost()) {
-      return (
-        <img
-          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') ? post.url : post.thumbnail}
-          alt={post.title}
-          className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-          loading={shouldPreload ? 'eager' : 'lazy'}
-          onLoad={handleImageLoaded}
-          style={{width: width, height: height}}
-        />
-      );
-    } else if (post.is_video) {
-      return (
-        <video 
-          style={{width: width, height: height}}
-          className='post_vid'
-          loading='lazy'
-          controls>
-          <source src={post.media.reddit_video.fallback_url} type='video/mp4' />
-        </video>
-      )
-    } else if(post.url && post.url.includes('gallery') && post.gallery_data && post.media_metadata) {
-      const imgId = post.gallery_data.items[0].media_id;
-      const imgOrigin = post.media_metadata[imgId]?.s?.u;
-      if (imgOrigin) {
-        const imageRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg))/i;
-        const match = imgOrigin.match(imageRegex);
-        if (match) {
-          const imageUrl = match[0];
-          return (
-            <img
-              src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)}
-              alt="comment-img"
-              width={width}
-              height={height}
-              onLoad={handleImageLoaded}
-              className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-              loading={shouldPreload ? 'eager' : 'lazy'}
-            />
-          );
-        }
-      }
-      return null;
-    } else {
-      return (
-        <img
-          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') ? post.url : post.thumbnail}
-          alt={post.title}
-          className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-          loading={shouldPreload ? 'eager' : 'lazy'}
-          onLoad={handleImageLoaded}
-          width={width}
-          height={height}
-        />
-      );
-    }
-  };
 
   const handleUpvoteClick = () => {
     if (upvoteIconSrc === turnOffArrow) {
@@ -154,7 +93,7 @@ const PostItem = ({ post }) => {
         
         <div onClick={handleCommentsClick} dangerouslySetInnerHTML={{__html: formatRedditText(post.selftext)}}></div>
 
-      {renderPostImage()}
+      {handleMedia(post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded)}
 
       <div className='interactions'>
         <div className='vote_container'>
