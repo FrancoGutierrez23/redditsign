@@ -40,8 +40,9 @@ const PostItem = ({ post }) => {
   };
 
   const isImagePost = () => {
-    const imageFormats = ['jpeg', 'jpg', 'png'];
-    return imageFormats.some(format => post?.url?.includes(format));
+    const imageFormats = ['jpeg', 'jpg', 'png', 'gif'];
+    const test = imageFormats.some(format => post?.url?.includes(format) || post?.thumbnail?.includes(format));
+    return test;
   };
 
 
@@ -93,7 +94,10 @@ const PostItem = ({ post }) => {
         
         <div onClick={handleCommentsClick} dangerouslySetInnerHTML={{__html: formatRedditText(post.selftext)}}></div>
 
-      {handleMedia(post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded)}
+      
+      {!isImagePost() && post.url? 
+        <a href={post.url} target='blank' className='source'>{post.url}</a> : 
+        <div className='post_media'>{handleMedia(post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded)}</div>}
 
       <div className='interactions'>
         <div className='vote_container'>

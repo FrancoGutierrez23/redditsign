@@ -1,6 +1,19 @@
 export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded) => {
-    const width = (post.thumbnail_width * 2) || 320;
-    const height = (post.thumbnail_height * 2) || 320;
+  
+    const obtainUrl = (post) => {
+      if(post?.media_embed?.content) {
+        const iframeString = post?.media_embed?.content;
+        const srcMatch = iframeString.match(/src="([^"]+)"/);
+        const videoUrl = srcMatch ? srcMatch[1] : null;
+        return videoUrl;
+      } else {
+        return false;
+      };
+    };
+    
+    
+    const width = window.screen.width > 500 ? (post.thumbnail_width * 3) || 320 : (post.thumbnail_width * 2) || 300;
+    const height = window.screen.width > 500 ? (post.thumbnail_height * 3) || 320 : (post.thumbnail_height * 2) || 300;
 
     let slideIndex = 1;
         showSlides(slideIndex, `gallery${post.id}`);
@@ -46,10 +59,10 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
           next.style.display = slideIndex === slides.length ? "none" : "block";
       }
     
-    if (isImagePost()) {
+    if (isImagePost() && !post.url.includes('gallery') && !post.is_video && !post.post_hint.includes('video')) {
       return (
         <img
-          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') ? post.url : post.thumbnail}
+          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') || post.url.includes('gif') ? post.url : post.thumbnail}
           alt={post.title}
           className={`post_img ${imageLoaded ? 'loaded' : ''}`}
           loading={shouldPreload ? 'eager' : 'lazy'}
@@ -57,15 +70,25 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
           style={{width: width, height: height}}
         />
       );
-    } else if (post.is_video) {
+    } else if (post.is_video && !post?.domain === 'youtu.be') {
       return (
         <video 
           style={{width: width, height: height}}
           className='post_vid'
           loading='lazy'
           controls>
-          <source src={post.media.reddit_video.fallback_url} type='video/mp4' />
+          <source src={post.media?.reddit_video?.fallback_url} type='video/mp4' />
         </video>
+      )
+    } else if(post?.domain === 'youtu.be' && !post.is_video) {
+      return (
+      <iframe 
+          title={post.title} 
+          src={obtainUrl(post)}
+          style={{width: width, height: height}}
+          loading="lazy"
+          className="post_vid">
+      </iframe>
       )
     } else if(post.url && post.url.includes('gallery') && post.gallery_data && post.media_metadata) {
       const imgOrigins = Object.values(post.media_metadata).map(p => p.s.u);
@@ -73,7 +96,9 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
       
       let widths = [320];
       for(let i = 0; i < Object.values(post.media_metadata).length; i++) {
-        widths.push(Object.values(post.media_metadata)[i].p[2].x);
+        if(Object.values(post.media_metadata)[i].p[2].x) {
+          widths.push(Object.values(post.media_metadata)[i].p[2].x);
+        }
       };
       //let maxWidth = Math.max(...widths);
       console.log(widths);
@@ -92,6 +117,7 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
           const imageUrls = matches.map(p => p[0]);
 
           return (
+            
             <div id={`gallery${post.id}`} className="slideshow-container">
                 {console.log(Object.values(post.media_metadata))}
                 {console.log(Object.values(post.media_metadata)[0].p)}
@@ -121,17 +147,9 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
         }
       }
       return null;
-    } else {
+    } else if(!isImagePost() && post.url) {
       return (
-        <img
-          src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') ? post.url : post.thumbnail}
-          alt={post.title}
-          className={`post_img ${imageLoaded ? 'loaded' : ''}`}
-          loading={shouldPreload ? 'eager' : 'lazy'}
-          onLoad={handleImageLoaded}
-          width={width}
-          height={height}
-        />
+        <></>
       );
     }
   };
