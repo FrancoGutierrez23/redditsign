@@ -82,6 +82,8 @@ const PostItem = ({ post }) => {
     return "0";
   };
 
+  const parser = new DOMParser();
+
   return (
     <>
       <div className='post_info'>
@@ -89,7 +91,7 @@ const PostItem = ({ post }) => {
         <span className='post_time'>{timeAgo(post.created)}</span>
       </div>
 
-      <h3 className='post_title' onClick={handleCommentsClick} >{post.title}</h3>
+      <h3 className='post_title' onClick={handleCommentsClick} >{parser.parseFromString(post.title, "text/html").documentElement.textContent}</h3>
 
         
         <div className='post_text' onClick={handleCommentsClick} dangerouslySetInnerHTML={{__html: formatRedditText(post.selftext)}}></div>
