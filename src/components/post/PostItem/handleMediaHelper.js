@@ -15,6 +15,9 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
     const width = window.screen.width > 500 ? (post.thumbnail_width * 3) || 320 : (post.thumbnail_width * 2) || 300;
     const height = window.screen.width > 500 ? (post.thumbnail_height * 3) || 320 : (post.thumbnail_height * 2) || 300;
 
+    const linkWidth = window.screen.width > 500 ? (post.thumbnail_width * 1.2) || 220 : (post.thumbnail_width) || 200;
+    const linkHeight = window.screen.width > 500 ? (post.thumbnail_height * 1.2) || 220 : (post.thumbnail_height) || 200;
+
     let slideIndex = 1;
         showSlides(slideIndex, `gallery${post.id}`);
         
@@ -59,7 +62,7 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
           next.style.display = slideIndex === slides.length ? "none" : "block";
       }
     
-    if (isImagePost() && !post.url.includes('gallery') && !post.is_video && !post.post_hint.includes('video')) {
+    if (isImagePost() && !post?.url?.includes('gallery') && !post.is_video && !post?.post_hint?.includes('video') && post?.post_hint !== 'link') {
       return (
         <img
           src={post.url.includes('jpeg') || post.url.includes('png') || post.url.includes('jpg') || post.url.includes('gif') ? post.url : post.thumbnail}
@@ -70,7 +73,22 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
           style={{width: width, height: height}}
         />
       );
-    } else if (post.is_video && !post?.domain === 'youtu.be') {
+    } else if (isImagePost() && !post?.url.includes('gallery') && !post.is_video && !post.post_hint?.includes('video') && post?.post_hint === 'link') {
+      return (
+        <a className="link" href={post.url} target='blank'>
+          <img
+            src={post?.url.includes('jpeg') || post?.url.includes('png') || post.url.includes('jpg') || post?.url.includes('gif') ? post.url : post.thumbnail}
+            alt={post.title}
+            className={`post_img ${imageLoaded ? 'loaded' : ''}`}
+            loading={shouldPreload ? 'eager' : 'lazy'}
+            onLoad={handleImageLoaded}
+            style={{width: linkWidth, height: linkHeight}}
+          />
+          <span className="source">{post.url}</span>
+        </a>
+      );
+    }
+     else if (post.is_video && !post?.domain === 'youtu.be') {
       return (
         <video 
           style={{width: width, height: height}}

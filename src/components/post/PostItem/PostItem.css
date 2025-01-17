@@ -35,10 +35,18 @@
 /* Post's title */
 .post_title {
   width: 100%;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
     cursor: pointer;
+}
+
+.post_text {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+  flex-direction: column;
 }
 
 .post p {
@@ -50,7 +58,8 @@
     line-height: 1.5em;
     cursor: pointer;
     text-indent: 1rem;
-    text-overflow: clip;
+    text-overflow: ellipsis;
+    color: #ffffffb1;
 }
 
 .post p[key='noFirst'] {
@@ -96,6 +105,27 @@ dialog p {
     width: 100%;
 }
 
+/* Post links */
+.link {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.link:hover {
+  transform: scale(1.02);
+  transition: all 0.25s;
+}
+
+.source {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.source:hover {
+  color: #fff;
+}
 
 /* Votes button */
 .vote_container {

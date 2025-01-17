@@ -92,12 +92,12 @@ const PostItem = ({ post }) => {
       <h3 className='post_title' onClick={handleCommentsClick} >{post.title}</h3>
 
         
-        <div onClick={handleCommentsClick} dangerouslySetInnerHTML={{__html: formatRedditText(post.selftext)}}></div>
+        <div className='post_text' onClick={handleCommentsClick} dangerouslySetInnerHTML={{__html: formatRedditText(post.selftext)}}></div>
 
       
-      {!isImagePost() && post.url? 
-        <a href={post.url} target='blank' className='source'>{post.url}</a> : 
-        <div className='post_media'>{handleMedia(post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded)}</div>}
+      {isImagePost()?
+        <div className='post_media'>{handleMedia(post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded)}</div>
+        : null}
 
       <div className='interactions'>
         <div className='vote_container'>
