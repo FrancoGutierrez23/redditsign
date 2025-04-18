@@ -56,10 +56,6 @@ export const handleMedia = (
     let next = document.querySelector(`#${galleryId} .next`);
 
     if (!slides.length || !dots.length || !prev || !next) {
-      console.log(slides.length);
-      console.log(dots.length);
-      console.log(prev);
-      console.log(next);
       return; // Exit the function if elements are not found
     }
 
@@ -138,7 +134,7 @@ export const handleMedia = (
         <span className="source">{post.url}</span>
       </a>
     );
-  } else if (post.is_video && !post?.domain === "youtu.be") {
+  } else if (post.is_video || !post?.domain === "youtu.be" ) {
     return (
       <video
         style={{ width: width, height: height }}

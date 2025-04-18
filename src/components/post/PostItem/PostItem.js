@@ -85,6 +85,7 @@ const PostItem = ({ post, context = "feed" }) => {
   };
 
   const parser = new DOMParser();
+  console.log(post);
 
   return (
     <>
@@ -112,7 +113,7 @@ const PostItem = ({ post, context = "feed" }) => {
       ></div>
 
       {isImagePost() && (
-        <div className="post_media">
+        <div className="post_media" onClick={handlePostClick}>
           {handleMedia(
             post,
             isImagePost,
