@@ -196,7 +196,7 @@ export const handleMedia = (
                 <img
                   src={imageUrl.slice(0, 8) + "i" + imageUrl.slice(15)}
                   alt="comment-img"
-                  style={{ maxHeight: "100%", maxWidth: "100%" }}
+                  style={{ maxHeight: "95%", maxWidth: "100%" }}
                   onLoad={handleImageLoaded}
                   className={`post_img ${imageLoaded ? "loaded" : ""}`}
                   loading={shouldPreload ? "eager" : "lazy"}

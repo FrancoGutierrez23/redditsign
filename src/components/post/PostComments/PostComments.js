@@ -18,6 +18,17 @@ const PostComments = () => {
     return null; // Don't render the modal if it's not open
   }
 
+  const colors = ['red', 'fuchsia', 'green', 'lime', 'yellow', 'blue', 'aqua',
+    'aquamarine', 'bisque', 'blueviolet', 'cornflowerblue', 'coral', 'darkseagreen',
+    'lightcyan', 'mediumpurple', 'mediumspringgreen', 'orange'
+  ];
+  
+  const selectColor = () => {
+    let n = Math.floor(Math.random() * colors.length);
+    let color = colors[n];
+    return color;
+  }
+
   const handleClose = () => {
     dispatch(closeCommentsModal()); // Action to close the modal
   };
@@ -74,7 +85,10 @@ const PostComments = () => {
           {comments.map((comment) => (
             <li key={comment.id} data-testid="comment">
               <p>
-                <strong>{comment.author ? `${comment.author}:` : null}</strong>
+                <span className="neon_text" style={{color: `${selectColor()}`}}>
+                  {comment.author ? `${comment.author}` : null}
+                </span>
+                :
               </p>
               {handleTextComment(comment.body)}
               {handleImgComment(comment)}

@@ -24,6 +24,16 @@
 
 .post_author {
     font-weight: normal;
+
+}
+
+.neon_text {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.post_subreddit {
+  font-weight: bold;
 }
 
 .post_time {
@@ -35,7 +45,7 @@
 /* Post's title */
 .post_title {
   width: 100%;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
     cursor: pointer;
@@ -47,6 +57,11 @@
   justify-content: start;
   width: 100%;
   flex-direction: column;
+  margin: 10px 0;
+}
+
+.post_text p {
+  margin-bottom: 10px;
 }
 
 .post p {
@@ -59,7 +74,7 @@
     cursor: pointer;
     text-indent: 1rem;
     text-overflow: ellipsis;
-    color: #ffffffb1;
+    color: #ffffffcd;
 }
 
 .post p[key='noFirst'] {
@@ -86,6 +101,7 @@ dialog p {
   width: 100%;
   display: flex;
   justify-content: center;
+  border-radius: 5px;
 }
 
 .post_img {
@@ -93,10 +109,13 @@ dialog p {
     cursor: pointer;
     transition: opacity 0.3s ease;
     max-height: 100ch;
+    border-radius: 5px;
+    margin-bottom: 1rem;
   }
   
   .post_img.loaded {
     opacity: 1;
+    border-radius: 5px;
   }
 
 /* Post buttons (upvotes and comments) */
@@ -182,7 +201,6 @@ dialog p {
   width: 100%;
   position: relative;
   margin: auto;
-  
 }
 
 /* Hide the images by default */

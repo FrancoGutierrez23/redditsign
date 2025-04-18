@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./PostItem.css";
 import { useDispatch } from "react-redux";
 import { selectPost, fetchComments } from "../../../redux/postItemSlice";
@@ -23,7 +23,19 @@ const PostItem = ({ post, context = "feed" }) => {
   const [upvoteIconSrc, setUpvoteIconSrc] = useState(turnOffArrow);
   const [downvoteIconSrc, setDownvoteIconSrc] = useState(turnOffArrow);
   const [voteCount, setVoteCount] = useState(post ? post.ups || 0 : 0);
+ 
+const colors = ['red', 'fuchsia', 'green', 'lime', 'yellow', 'blue', 'aqua',
+  'aquamarine', 'bisque', 'blueviolet', 'cornflowerblue', 'coral', 'darkseagreen',
+  'lightcyan', 'mediumpurple', 'mediumspringgreen', 'orange'
+];
+  const selectColor = () => colors[Math.floor(Math.random() * colors.length)];
+  const neonColorRef = useRef(selectColor());
+  const neonColor = neonColorRef.current;
 
+  const neonShadow = `
+  0 0 7px ${neonColor},
+  0 0 10px ${neonColor}
+`;
   const handleImageLoaded = () => {
     setImageLoaded(true);
   };
@@ -90,12 +102,22 @@ const PostItem = ({ post, context = "feed" }) => {
   return (
     <>
       <div className="post_info">
-        <span className="post_author">
-          {post.author} in{" "}
-          <a href={post.subreddit_name_prefixed}>
+        <div className="post_author">
+        <span
+        className="neon_text"
+        style={{
+          color: neonColor,
+          fontWeight: 'bold',
+          textShadow: neonShadow,
+        }}
+      >
+        {` ${post.author} ${"  "}`}
+      </span>
+          <a className="post_subreddit" href={post.subreddit_name_prefixed}>
+            {" in "}
             {post.subreddit_name_prefixed}
           </a>
-        </span>
+        </div>
         <span className="post_time">{timeAgo(post.created)}</span>
       </div>
 
@@ -113,7 +135,7 @@ const PostItem = ({ post, context = "feed" }) => {
       ></div>
 
       {isImagePost() && (
-        <div className="post_media" onClick={handlePostClick}>
+        <div className="post_media">
           {handleMedia(
             post,
             isImagePost,
