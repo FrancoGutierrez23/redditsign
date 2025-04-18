@@ -16,7 +16,7 @@ const formatCommentsCount = (numComments) => {
   return "0";
 };
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, context = 'feed' }) => {
   const dispatch = useDispatch();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [shouldPreload, setShouldPreload] = useState(true);
@@ -97,9 +97,17 @@ const PostItem = ({ post }) => {
         <div className='post_text' onClick={handleCommentsClick} dangerouslySetInnerHTML={{__html: formatRedditText(post.selftext)}}></div>
 
       
-      {isImagePost()?
-        <div className='post_media'>{handleMedia(post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded)}</div>
-        : null}
+        {isImagePost() &&
+       <div className='post_media'>
+          {handleMedia(
+              post,
+              isImagePost,
+            imageLoaded,
+             shouldPreload,
+             handleImageLoaded,
+              context          
+         )}
+        </div>}
 
       <div className='interactions'>
         <div className='vote_container'>

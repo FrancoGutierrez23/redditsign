@@ -56,7 +56,7 @@ const PostComments = () => {
         <span className="close_icon" alt="close">X</span>
       </button>
       <div className="modal-content">
-        <PostItem post={post} className="focus" />
+        <PostItem post={post} context='modal' className="focus" />
 
         <h4>Comments</h4>
         {loading && <div className="comments_loader" data-testid="comments-loader"></div>}

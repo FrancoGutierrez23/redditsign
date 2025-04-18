@@ -82,7 +82,7 @@ dialog p {
 
 /* Post's Image */
 .post_media {
-  background-image: linear-gradient(to bottom, #61370d85, #0000004e);
+  overflow: hidden;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -92,6 +92,7 @@ dialog p {
     display: inline;
     cursor: pointer;
     transition: opacity 0.3s ease;
+    max-height: 100ch;
   }
   
   .post_img.loaded {
@@ -186,7 +187,7 @@ dialog p {
 
 /* Hide the images by default */
 .slides {
-  background-image: linear-gradient(to bottom, #61370d85, #0000004e);
+  box-sizing: border-box;
 }
 
 .current_slide {
@@ -241,6 +242,14 @@ dialog p {
 }
 
 /* The dots/bullets/indicators */
+.dots {
+  background-color: #000000;
+  position: relative;
+  padding-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
 .dot {
   cursor: pointer;
   height: 15px;

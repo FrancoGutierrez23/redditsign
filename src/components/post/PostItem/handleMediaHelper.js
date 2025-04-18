@@ -1,4 +1,4 @@
-export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded) => {
+export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handleImageLoaded, context = 'feed') => {
   
     const obtainUrl = (post) => {
       if(post?.media_embed?.content) {
@@ -18,8 +18,9 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
     const linkWidth = window.screen.width > 500 ? (post.thumbnail_width * 1.2) || 220 : (post.thumbnail_width) || 200;
     const linkHeight = window.screen.width > 500 ? (post.thumbnail_height * 1.2) || 220 : (post.thumbnail_height) || 200;
 
+    const galleryId = `gallery${post.id}-${context}`;
     let slideIndex = 1;
-        showSlides(slideIndex, `gallery${post.id}`);
+        showSlides(slideIndex, galleryId);
         
         // Next/previous controls
         function plusSlides(n, galleryId) {
@@ -39,6 +40,10 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
           let next = document.querySelector(`#${galleryId} .next`);
       
           if (!slides.length || !dots.length || !prev || !next) {
+            console.log(slides.length);
+            console.log(dots.length);
+            console.log(prev);
+            console.log(next);
               return; // Exit the function if elements are not found
           }
       
@@ -50,7 +55,7 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
           for (let i = 0; i < dots.length; i++) {
               dots[i].className = dots[i].className.replace(" active", "");
           }
-          //slides[slideIndex-1].style.display = "block";
+
           slides[slideIndex-1].style.display = "flex";
           slides[slideIndex-1].style.justifyContent = "center";
           slides[slideIndex-1].style.alignItems = "center";
@@ -58,7 +63,7 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
       
           // Hide previous button on the first slide and next button on the last slide
           prev.style.display = slideIndex === 1 ? "none" : "block";
-          console.log(slides.length)
+
           next.style.display = slideIndex === slides.length ? "none" : "block";
       }
     
@@ -114,19 +119,17 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
       
       let widths = [320];
       for(let i = 0; i < Object.values(post.media_metadata).length; i++) {
-        if(Object.values(post.media_metadata)[i].p[2].x) {
+        if(Object.values(post.media_metadata)[i].p[2]?.x) {
           widths.push(Object.values(post.media_metadata)[i].p[2].x);
         }
       };
-      //let maxWidth = Math.max(...widths);
-      console.log(widths);
-      
+
       let heights = [320];
       for(let i = 0; i < Object.values(post.media_metadata).length; i++) {
-          heights.push(Object.values(post.media_metadata)[i].p[2].y);
+          heights.push(Object.values(post.media_metadata)[i].p[2]?.y);
       };
       let maxHeight = Math.max(...heights);
-      console.log(maxHeight);
+
 
       if (imgOrigins) {
         const imageRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg))/i;
@@ -136,11 +139,7 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
 
           return (
             
-            <div id={`gallery${post.id}`} className="slideshow-container">
-                {console.log(Object.values(post.media_metadata))}
-                {console.log(Object.values(post.media_metadata)[0].p)}
-                {console.log(Object.values(post.media_metadata)[0].p[2])}
-                {console.log(Object.values(post.media_metadata)[0].p[2].x)}
+            <div id={galleryId} className="slideshow-container">
                 {imageUrls.map((imageUrl, index) => (
                     <div className="slides fade" key={index} style={{height:maxHeight, width: '100%', maxHeight: '400px'}}>
                         <div className="numbertext">{index + 1} / {imageUrls.length}</div>
@@ -153,8 +152,8 @@ export const handleMedia = (post, isImagePost, imageLoaded, shouldPreload, handl
                         />
                     </div>
                 ))}
-                <span className="prev" onClick={() => plusSlides(-1, `gallery${post.id}`)}>&#10094;</span>
-                <span className="next" onClick={() => plusSlides(1, `gallery${post.id}`)}>&#10095;</span>
+<span className="prev" onClick={() => plusSlides(-1, galleryId)}>&#10094;</span>
+                <span className="next" onClick={() => plusSlides( 1, galleryId)}>&#10095;</span>
                 <div className="dots">
                     {imageUrls.map((_, index) => (
                         <span key={index} className="dot" onClick={() => currentSlide(index + 1, `gallery${post.id}`)}></span>
