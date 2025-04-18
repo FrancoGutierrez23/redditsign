@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchPosts, resetPosts } from '../../../redux/postsSlice';
-import './SubredditList.css';
+import React, { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { fetchPosts, resetPosts } from "../../../redux/postsSlice";
+import "./SubredditList.css";
 
 const SubredditList = () => {
   const dispatch = useDispatch();
-  const [selectedSubreddit, setSelectedSubreddit] = useState('pics');
+  const [selectedSubreddit, setSelectedSubreddit] = useState("pics");
   const [isListVisible, setIsListVisible] = useState(false);
   const listRef = useRef(null);
 
@@ -22,8 +22,8 @@ const SubredditList = () => {
   };
 
   const handleSubredditClick = (sub) => {
-    if (sub === 'pics') {
-      window.location.reload()
+    if (sub === "pics") {
+      window.location.reload();
     } else {
       setSelectedSubreddit(sub);
     }
@@ -38,12 +38,12 @@ const SubredditList = () => {
 
   useEffect(() => {
     if (isListVisible) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isListVisible]);
 
@@ -53,15 +53,26 @@ const SubredditList = () => {
         Subreddits
       </h3>
       {isListVisible && (
-        <div className='subreddits_options_container'>
+        <div className="subreddits_options_container">
           {[
-            'pics', 'funny', 'nature', 'technology', 'gaming',
-            'paranormal', 'news', 'AskReddit', 'aww',
-            'todayilearned', 'science', 'movies'
+            "pics",
+            "funny",
+            "nature",
+            "technology",
+            "gaming",
+            "paranormal",
+            "news",
+            "AskReddit",
+            "aww",
+            "todayilearned",
+            "science",
+            "movies",
           ].map((sub) => (
             <button
               key={sub}
-              className={`subreddit_option ${selectedSubreddit === sub ? 'active' : 'not_active'}`}
+              className={`subreddit_option ${
+                selectedSubreddit === sub ? "active" : "not_active"
+              }`}
               onClick={() => handleSubredditClick(sub)}
             >
               {sub}

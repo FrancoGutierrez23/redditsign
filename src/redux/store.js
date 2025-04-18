@@ -1,14 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import postsReducer from './postsSlice';
-import postItemReducer from './postItemSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import postsReducer from "./postsSlice";
+import postItemReducer from "./postItemSlice";
 
 const store = configureStore({
   reducer: {
     posts: postsReducer,
-    postItem: postItemReducer
+    postItem: postItemReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;

@@ -5,8 +5,8 @@ const cache = new Map();
 export const fetchSuspense = (key, fetcher) => {
   if (!cache.has(key)) {
     const promise = fetcher().then(
-      data => cache.set(key, { data }),
-      error => cache.set(key, { error })
+      (data) => cache.set(key, { data }),
+      (error) => cache.set(key, { error })
     );
     cache.set(key, { promise });
   }

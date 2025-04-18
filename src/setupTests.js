@@ -1,11 +1,11 @@
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 // Mocking global functions and properties
 window.scrollTo = jest.fn();
-Object.defineProperty(window, 'location', {
+Object.defineProperty(window, "location", {
   value: {
     ...window.location,
-    reload: jest.fn()
+    reload: jest.fn(),
   },
-  writable: true
+  writable: true,
 });

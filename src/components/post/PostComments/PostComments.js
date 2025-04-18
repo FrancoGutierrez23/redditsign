@@ -1,12 +1,18 @@
-import React from 'react';
-import './PostComments.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { closeCommentsModal } from '../../../redux/postItemSlice';
-import PostItem from '../PostItem/PostItem';
+import React from "react";
+import "./PostComments.css";
+import { useSelector, useDispatch } from "react-redux";
+import { closeCommentsModal } from "../../../redux/postItemSlice";
+import PostItem from "../PostItem/PostItem";
 
 const PostComments = () => {
   const dispatch = useDispatch();
-  const { post, comments = [], loading, error, isModalOpen } = useSelector((state) => state.postItem);
+  const {
+    post,
+    comments = [],
+    loading,
+    error,
+    isModalOpen,
+  } = useSelector((state) => state.postItem);
 
   if (!isModalOpen) {
     return null; // Don't render the modal if it's not open
@@ -17,7 +23,7 @@ const PostComments = () => {
   };
 
   const handleImgComment = (comment) => {
-    if (typeof comment.body_html !== 'string') {
+    if (typeof comment.body_html !== "string") {
       return <></>;
     }
     const imageRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg))/i;
@@ -27,7 +33,7 @@ const PostComments = () => {
       const imageUrl = match[0];
       return (
         <img
-          src={imageUrl.slice(0, 8) + 'i' + imageUrl.slice(15)} 
+          src={imageUrl.slice(0, 8) + "i" + imageUrl.slice(15)}
           alt="comment-img"
           width="320px"
           className="comment_img"
@@ -39,27 +45,27 @@ const PostComments = () => {
   };
 
   const handleTextComment = (text) => {
-  if (text) {
-    return (
-      <p>
-        {text.match(/([A-Za-z0-9]+( [A-Za-z0-9]+)+)/g) || null}
-      </p>
-    )
-  } else {
-    return null;
-  }
-};
+    if (text) {
+      return <p>{text.match(/([A-Za-z0-9]+( [A-Za-z0-9]+)+)/g) || null}</p>;
+    } else {
+      return null;
+    }
+  };
 
   return (
     <div open className="comments-modal" role="dialog">
       <button onClick={handleClose} className="modal-close-button">
-        <span className="close_icon" alt="close">X</span>
+        <span className="close_icon" alt="close">
+          X
+        </span>
       </button>
       <div className="modal-content">
-        <PostItem post={post} context='modal' className="focus" />
+        <PostItem post={post} context="modal" className="focus" />
 
         <h4>Comments</h4>
-        {loading && <div className="comments_loader" data-testid="comments-loader"></div>}
+        {loading && (
+          <div className="comments_loader" data-testid="comments-loader"></div>
+        )}
         {error && <p>Error loading comments: {error}</p>}
         {!loading && comments && comments.length === 0 && (
           <span className="posts_fallback">No comments available.</span>
@@ -68,7 +74,7 @@ const PostComments = () => {
           {comments.map((comment) => (
             <li key={comment.id} data-testid="comment">
               <p>
-                <strong>{comment.author? `${comment.author}:` : null}</strong>
+                <strong>{comment.author ? `${comment.author}:` : null}</strong>
               </p>
               {handleTextComment(comment.body)}
               {handleImgComment(comment)}

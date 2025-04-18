@@ -1,13 +1,15 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchComments = createAsyncThunk(
-  'postItem/fetchComments',
+  "postItem/fetchComments",
   async (permalink, thunkAPI) => {
     try {
       const trimmedPermalink = permalink.slice(0, -1);
-      const response = await fetch(`https://www.reddit.com${trimmedPermalink}.json`);
+      const response = await fetch(
+        `https://www.reddit.com${trimmedPermalink}.json`
+      );
       const data = await response.json();
-      const comments = data[1].data.children.map(child => child.data);
+      const comments = data[1].data.children.map((child) => child.data);
       return comments;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -16,7 +18,7 @@ export const fetchComments = createAsyncThunk(
 );
 
 const postItemSlice = createSlice({
-  name: 'postItem',
+  name: "postItem",
   initialState: {
     post: null,
     comments: [],
@@ -34,7 +36,7 @@ const postItemSlice = createSlice({
       state.isModalOpen = false; // Close the modal
       state.post = null;
       state.comments = [];
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,11 +52,8 @@ const postItemSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-  }
+  },
 });
 
 export const { selectPost, closeCommentsModal } = postItemSlice.actions;
 export default postItemSlice.reducer;
-
-
-
