@@ -7,10 +7,29 @@
     font-size: 1.17rem;
 }
 
-.subreddits_title::before {
-    content: '>';
-    color: #ffffff96;
-    margin-right: 0.1rem;
+.menu {
+    height: 2rem;
+    width: 25vw;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .menu {
+        width: 2rem;
+    }
+}
+
+.menu:hover {
+    transform: scale(1.1);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.menu_logo {
+    width: 2rem;
+    height: auto;
 }
 
 .subreddits_options_container {
