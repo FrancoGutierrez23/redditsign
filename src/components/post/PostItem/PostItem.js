@@ -7,8 +7,7 @@ import downVotes from "../../../assets/down_votes.png";
 import turnOffArrow from "../../../assets/turn_off_arrow.png";
 import commentsIcon from "../../../assets/comments.jpg";
 import { formatRedditText, timeAgo } from "../../utils";
-import { handleMedia } from "./handleMediaHelper";
-
+import Media from "./Media";
 const formatCommentsCount = (numComments) => {
   if (typeof numComments === "number") {
     return numComments.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -23,11 +22,26 @@ const PostItem = ({ post, context = "feed" }) => {
   const [upvoteIconSrc, setUpvoteIconSrc] = useState(turnOffArrow);
   const [downvoteIconSrc, setDownvoteIconSrc] = useState(turnOffArrow);
   const [voteCount, setVoteCount] = useState(post ? post.ups || 0 : 0);
- 
-const colors = ['red', 'fuchsia', 'green', 'lime', 'yellow', 'blue', 'aqua',
-  'aquamarine', 'bisque', 'blueviolet', 'cornflowerblue', 'coral', 'darkseagreen',
-  'lightcyan', 'mediumpurple', 'mediumspringgreen', 'orange'
-];
+
+  const colors = [
+    "red",
+    "fuchsia",
+    "green",
+    "lime",
+    "yellow",
+    "blue",
+    "aqua",
+    "aquamarine",
+    "bisque",
+    "blueviolet",
+    "cornflowerblue",
+    "coral",
+    "darkseagreen",
+    "lightcyan",
+    "mediumpurple",
+    "mediumspringgreen",
+    "orange",
+  ];
   const selectColor = () => colors[Math.floor(Math.random() * colors.length)];
   const neonColorRef = useRef(selectColor());
   const neonColor = neonColorRef.current;
@@ -103,16 +117,16 @@ const colors = ['red', 'fuchsia', 'green', 'lime', 'yellow', 'blue', 'aqua',
     <>
       <div className="post_info">
         <div className="post_author">
-        <span
-        className="neon_text"
-        style={{
-          color: neonColor,
-          fontWeight: 'bold',
-          textShadow: neonShadow,
-        }}
-      >
-        {` ${post.author} ${"  "}`}
-      </span>
+          <span
+            className="neon_text"
+            style={{
+              color: neonColor,
+              fontWeight: "bold",
+              textShadow: neonShadow,
+            }}
+          >
+            {` ${post.author} ${"  "}`}
+          </span>
           <a className="post_subreddit" href={post.subreddit_name_prefixed}>
             {" in "}
             {post.subreddit_name_prefixed}
@@ -136,14 +150,12 @@ const colors = ['red', 'fuchsia', 'green', 'lime', 'yellow', 'blue', 'aqua',
 
       {isImagePost() && (
         <div className="post_media">
-          {handleMedia(
-            post,
-            isImagePost,
-            imageLoaded,
-            shouldPreload,
-            handleImageLoaded,
-            context
-          )}
+          <Media
+            post={post}
+            shouldPreload={shouldPreload}
+            onImageLoaded={handleImageLoaded}
+            context={context} // or "modal", etc.
+          />
         </div>
       )}
 
