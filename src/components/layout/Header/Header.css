@@ -3,7 +3,7 @@ header {
     display: flex;
     position: fixed;
     width: 100%;
-    padding: 0.5rem 1rem 0rem 1rem;
+    padding: 0.5rem 0rem 0rem 0.5rem;
     justify-content: space-between;
     align-items: center;
     z-index: 2000;
@@ -44,12 +44,17 @@ header {
 
 @media only screen and (max-width: 500px) {
     header {
-        flex-wrap: wrap;
         width: 100%;
+
     }
 
     .logo {
         width: 13%;
+    }
+
+    .logo img {
+        width: 3rem;
+        height: 3rem;
     }
 
     .search_form {

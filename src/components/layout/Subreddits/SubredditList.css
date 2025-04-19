@@ -1,5 +1,5 @@
 .subreddits_list {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 .subreddits_title {
@@ -88,8 +88,3 @@
     margin-right: 0.1rem;
 }
 
-@media only screen and (max-width: 500px) {
-    .subreddits_list {
-        margin: 1rem 0;
-    }
-}

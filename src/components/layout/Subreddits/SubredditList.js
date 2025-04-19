@@ -61,11 +61,11 @@ const SubredditList = () => {
     <aside className="subreddits_list" ref={listRef}>
       {width > 600 ? (
         <div className="menu" onClick={toggleListVisibility}>
-        <MdOutlineMenuOpen className="menu_logo" />
-      
-        <h3 className="subreddits_title" onClick={toggleListVisibility}>
-          Subreddits
-        </h3>
+          <MdOutlineMenuOpen className="menu_logo" />
+
+          <h3 className="subreddits_title" onClick={toggleListVisibility}>
+            Subreddits
+          </h3>
         </div>
       ) : (
         <div className="menu" onClick={toggleListVisibility}>
