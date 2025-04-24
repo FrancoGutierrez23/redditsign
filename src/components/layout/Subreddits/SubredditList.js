@@ -17,8 +17,6 @@ const SubredditList = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  console.log(width);
-
   useEffect(() => {
     dispatch(resetPosts()); // Reset posts when subreddit changes
     dispatch(fetchPosts({ subreddit: selectedSubreddit, after: null }));
@@ -63,7 +61,7 @@ const SubredditList = () => {
         <div className="menu" onClick={toggleListVisibility}>
           <MdOutlineMenuOpen className="menu_logo" />
 
-          <h3 className="subreddits_title" onClick={toggleListVisibility}>
+          <h3 className="subreddits_title">
             Subreddits
           </h3>
         </div>

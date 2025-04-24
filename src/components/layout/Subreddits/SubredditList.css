@@ -48,9 +48,7 @@
 
 @media only screen and (max-width: 500px) {
     .subreddits_options_container {
-        top: 7rem;
-        right: auto;
-        left: 2%;
+        top: 4rem;
     }
 }
 

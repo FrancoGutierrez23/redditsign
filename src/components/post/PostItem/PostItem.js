@@ -111,8 +111,7 @@ const PostItem = ({ post, context = "feed" }) => {
   };
 
   const parser = new DOMParser();
-  console.log(post);
-
+  
   return (
     <>
       <div className="post_info">
